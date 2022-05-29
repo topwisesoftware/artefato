@@ -40,49 +40,49 @@ $(function () {
 
 	</script>
 	<!-- Bootstrap 4 -->
-	<script src="<?php echo base_url(); ?>/vendor/adminlte/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+	<script src="<?= base_url('/vendor/adminlte/plugins/bootstrap/js/bootstrap.bundle.min.js') ?>"></script>
 	<!-- ChartJS -->
-	<script src="<?php echo base_url(); ?>/vendor/adminlte/plugins/chart.js/Chart.min.js"></script>
+	<script src="<?= base_url('/vendor/adminlte/plugins/chart.js/Chart.min.js') ?>"></script>
 	<!-- Sparkline -->
-	<script src="<?php echo base_url(); ?>/vendor/adminlte/plugins/sparklines/sparkline.js"></script>
+	<script src="<?= base_url('/vendor/adminlte/plugins/sparklines/sparkline.js') ?>"></script>
 	<!-- JQVMap -->
-	<script src="<?php echo base_url(); ?>/vendor/adminlte/plugins/jqvmap/jquery.vmap.min.js"></script>
-	<script src="<?php echo base_url(); ?>/vendor/adminlte/plugins/jqvmap/maps/jquery.vmap.usa.js"></script>
+	<script src="<?= base_url('/vendor/adminlte/plugins/jqvmap/jquery.vmap.min.js') ?>"></script>
+	<script src="<?= base_url('/vendor/adminlte/plugins/jqvmap/maps/jquery.vmap.usa.js') ?>"></script>
 	<!-- jQuery Knob Chart -->
-	<script src="<?php echo base_url(); ?>/vendor/adminlte/plugins/jquery-knob/jquery.knob.min.js"></script>
+	<script src="<?= base_url('/vendor/adminlte/plugins/jquery-knob/jquery.knob.min.js') ?>"></script>
 	<!-- daterangepicker -->
-	<script src="<?php echo base_url(); ?>/vendor/adminlte/plugins/moment/moment.min.js"></script>
-	<script src="<?php echo base_url(); ?>/vendor/adminlte/plugins/daterangepicker/daterangepicker.js"></script>
+	<script src="<?= base_url('/vendor/adminlte/plugins/moment/moment.min.js') ?>"></script>
+	<script src="<?= base_url('/vendor/adminlte/plugins/daterangepicker/daterangepicker.js') ?>"></script>
 	<!-- Tempusdominus Bootstrap 4 -->
-	<script src="<?php echo base_url(); ?>/vendor/adminlte/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js"></script>
+	<script src="<?= base_url('/vendor/adminlte/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js') ?>"></script>
 	<!-- Summernote -->
-	<script src="<?php echo base_url(); ?>/vendor/adminlte/plugins/summernote/summernote-bs4.min.js"></script>
+	<script src="<?= base_url('/vendor/adminlte/plugins/summernote/summernote-bs4.min.js') ?>"></script>
 	<!-- overlayScrollbars -->
-	<script src="<?php echo base_url(); ?>/vendor/adminlte/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
+	<script src="<?= base_url('/vendor/adminlte/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js') ?>"></script>
 	<!-- pace-progress -->
-	<script src="<?php echo base_url(); ?>/vendor/adminlte/plugins/pace-progress/pace.min.js"></script>
+	<script src="<?= base_url('/vendor/adminlte/plugins/pace-progress/pace.min.js') ?>"></script>
 	<!-- iCheck for checkboxes and radio inputs -->
-  	<link rel="stylesheet" href="<?php echo base_url(); ?>/vendor/adminlte/plugins/icheck-bootstrap/icheck-bootstrap.min.css">
+  	<link rel="stylesheet" href="<?= base_url('/vendor/adminlte/plugins/icheck-bootstrap/icheck-bootstrap.min.css') ?>">
 	<!-- DataTables -->
-	<script src="<?php echo base_url(); ?>/vendor/adminlte/plugins/datatables/jquery.dataTables.min.js"></script>
-	<script src="<?php echo base_url(); ?>/vendor/adminlte/plugins/datatables-bs4/js/dataTables.bootstrap4.js"></script>
-	<!-- <script src="<?php echo base_url(); ?>/vendor/adminlte/plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script> -->
+	<script src="<?= base_url('/vendor/adminlte/plugins/datatables/jquery.dataTables.min.js') ?>"></script>
+	<script src="<?= base_url('/vendor/adminlte/plugins/datatables-bs4/js/dataTables.bootstrap4.js') ?>"></script>
+	<!-- <script src="<?php // base_url('/vendor/adminlte/plugins/datatables-responsive/js/responsive.bootstrap4.min.js') ?>"></script> -->
 	<!-- Select2 -->
-	<script src="<?php echo base_url(); ?>/vendor/adminlte/plugins/select2/js/select2.full.min.js"></script>
+	<script src="<?= base_url('/vendor/adminlte/plugins/select2/js/select2.full.min.js') ?>"></script>
 	<!-- SweetAlert2 -->
-	<script src="<?php echo base_url(); ?>/vendor/adminlte/plugins/sweetalert2/sweetalert2.all.min.js"></script>
+	<script src="<?= base_url('/vendor/adminlte/plugins/sweetalert2/sweetalert2.all.min.js') ?>"></script>
 	<!-- Toastr -->
-	<script src="<?php echo base_url(); ?>/vendor/adminlte/plugins/toastr/toastr.min.js"></script>
+	<script src="<?= base_url('/vendor/adminlte/plugins/toastr/toastr.min.js') ?>"></script>
 	<!-- jquery-validation -->
-	<script src="<?php echo base_url(); ?>/vendor/adminlte/plugins/jquery-validation/jquery.validate.min.js"></script>
-	<script src="<?php echo base_url(); ?>/vendor/adminlte/plugins/jquery-validation/additional-methods.min.js"></script>
+	<script src="<?= base_url('/vendor/adminlte/plugins/jquery-validation/jquery.validate.min.js') ?>"></script>
+	<script src="<?= base_url('/vendor/adminlte/plugins/jquery-validation/additional-methods.min.js') ?>"></script>
 	<!-- jquery-idle -->
-	<script src="<?php echo base_url(); ?>/vendor/adminlte/plugins/jquery-idle/jquery.idle.min.js"></script>
+	<script src="<?= base_url('/vendor/adminlte/plugins/jquery-idle/jquery.idle.min.js') ?>"></script>
 	<!-- Bootstrap Switch -->
-	<script src="<?php echo base_url(); ?>/vendor/adminlte/plugins/bootstrap-switch/js/bootstrap-switch.min.js"></script>
+	<script src="<?= base_url('/vendor/adminlte/plugins/bootstrap-switch/js/bootstrap-switch.min.js') ?>"></script>
 
 	<!-- AdminLTE App -->
-	<script src="<?php echo base_url(); ?>/vendor/adminlte/dist/js/adminlte.js"></script>
+	<script src="<?= base_url('/vendor/adminlte/dist/js/adminlte.js') ?>"></script>
 
 	<!-- js personalizados -->
     <?= $this->include('_modelos/_js/js_main') ?>

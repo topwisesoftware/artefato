@@ -23,7 +23,7 @@ class App extends BaseConfig
      *
      * @var string
      */
-    public $baseURL = 'http://linuxsrv/lab/wise/site/';
+    public $baseURL = 'http://linuxsrv/lab/artefato/site/';
 
     /**
      * --------------------------------------------------------------------------

@@ -5,7 +5,7 @@
         $.get('<?= base_url('Usuarios/exibir') ?>', function(data)
         {
             MyTable.fnDestroy();
-            $('#dados-usuario').html(data);
+            $('#dados-usuarios').html(data);
             refresh();
         });
     }

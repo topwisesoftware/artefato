@@ -8,12 +8,7 @@ Oferece toda a base pronta para se inciar rapidamente um projeto sem a necessida
 
 ## Instação e Atualizações
 
-`composer create-project codeigniter4/appstarter` then `composer update` whenever
-there is a new release of the framework.
-
-When updating, check the release notes to see if there are any changes you might need to apply
-to your `app` folder. The affected files can be copied or merged from
-`vendor/codeigniter4/framework/app`.
+`composer create-project codeigniter4/appstarter` e então `composer update` sempre que houver uma nova versão do framework.
 
 ## Configurações para o CodeIgniter
 
@@ -29,3 +24,9 @@ PHP versão 7.3 or superior é necessário com as seguintes extensões instalada
 - [mbstring](http://php.net/manual/en/mbstring.installation.php)
 - [mysqlnd](http://php.net/manual/en/mysqlnd.install.php)
 - xml
+
+## Histórico de versões
+
+- Artefato 2022 - Baseado em Codeigniter 4.x e AdminLTE 3.x
+- Artefato 2019 - Baseado em Codeigniter 3.x e AdminLTE 2.x
+- Artefato 2015 - Baseado em Codeigniter 3.x e AdminLTE 1.x

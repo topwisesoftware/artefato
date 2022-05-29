@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="pt_BR">
 	<head>
-		<title>TopWise Artefato</title>
+		<title><?= TopWise_App_Nome() ?> | <?= @$titulo ?></title>
 		<!-- meta -->
 		<?= $this->include('_modelos/_tela/meta') ?>
 		<!-- css -->

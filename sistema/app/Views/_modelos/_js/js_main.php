@@ -89,7 +89,7 @@
 	// carrega apenas a lib de funções Ajax necessária para evitar desperdício
 	// evitando as páginas definidas como excluídas
 	if (!in_array($pagina, $paginas_excluidas)) {
-        echo $this->include('_modelos/_js/js_' . strtolower($pagina));        
+        echo $this->include('admin/' . strtolower($pagina) . '/js_' . strtolower($pagina));        
 	}
 ?>
 </script>

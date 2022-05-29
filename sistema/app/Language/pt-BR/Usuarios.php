@@ -6,6 +6,10 @@ return [
         'singular' => 'Usuário',
         'plural' => 'Usuários',
         'campos' => [
+            'id' => [
+                'nome' => '#',
+                'descricao' => 'ID do Usuário',
+            ],
             'login' => [
                 'nome' => 'Login',
                 'descricao' => 'Nome de Login do Usuário',
@@ -30,7 +34,11 @@ return [
             'idioma' => [
                 'nome' => 'Idioma',
                 'descricao' => 'Informe uma Idioma Padrão',
-            ],            
+            ],
+            'foto' => [
+                'nome' => 'Foto',
+                'descricao' => 'Foto do Usuário',
+            ]
         ],
         'abas' => [
             'info' => 'Informação Pessoal',

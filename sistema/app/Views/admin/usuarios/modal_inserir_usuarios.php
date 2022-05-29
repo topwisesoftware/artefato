@@ -89,7 +89,7 @@
     </div> <!-- modal-body -->
 
     <div class="modal-footer justify-content-between">
-        <button type="button" class="btn btn-default" id="cancel_form_edit" data-dismiss="modal"> <i class="far fa-window-close mr-2"></i> <?= lang('Artefato.crud.botoes.cancelar') ?></button>
+        <button type="button" class="btn btn-default" id="cancel_form_edit" data-dismiss="modal"> <i class="fas fa-times mr-2 text-danger"></i> <?= lang('Artefato.crud.botoes.cancelar') ?></button>
         <button type="submit" class="btn btn-primary"> <i class="fas fa-save mr-2"></i></i> <?= lang('Artefato.crud.botoes.salvar') ?></button>
     </div>
 </form>
