@@ -35,8 +35,25 @@ return [
         ],
         'listagens' => [
             'alfabetica' => 'por Ordem Alfabética ~ sem filtros',
-        ]
-
+        ],
+        'mensagens' => [
+            'excluir' => [
+                'excluindo' => 'Excluindo',
+                'sim' => 'Sim, excluir!',
+                'nao' => 'NÃO, CANCELAR!',
+                'erro' => 'Erro ao excluir!',
+                'erromsg' => 'Não foi possível excluir o registro',
+                'excluido' => 'Excluido',
+                'sucesso' => 'excluído com sucesso!',
+            ],
+            'geral' => [
+                'certeza' => 'Tem certeza?',
+                'aviso' => 'Esta operação não poderá ser desfeita!',
+                'registro' => 'Registro',
+                'verifique' => 'Verifique!',
+                'cancelar' => 'NÃO, CANCELAR!',
+            ]
+        ],
     ],
     'relatorios' => [
         'mensagens' => [
