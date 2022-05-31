@@ -14,6 +14,10 @@ return [
                 'nome' => 'Login',
                 'descricao' => 'Nome de Login do Usuário',
             ],
+            'email' => [
+                'nome' => 'Email',
+                'descricao' => 'Endereço de email do usuário',
+            ],
             'nome' => [
                 'nome' => 'Nome',
                 'descricao' => 'Nome do Usuário',

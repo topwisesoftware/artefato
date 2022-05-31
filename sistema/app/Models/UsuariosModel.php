@@ -36,9 +36,15 @@ class UsuariosModel extends Model
     protected $updatedField  = 'DATAALTERACAO';
     protected $deletedField  = 'DATAEXCLUSAO';    
 
-    protected $validationRules    = [];
-    protected $validationMessages = [];
-    protected $skipValidation     = false;
+    protected $validationRules    = [
+        'LOGIN' => 'required|min_length[3]|is_unique[usuarios.LOGIN]',
+        'EMAIL' => 'required|valid_email',
+        'NOME' => 'required',
+    ];
+    protected $validationMessages = [
+        'LOGIN' => 'Login'
+    ];
+    protected $skipValidation = false;
 
     // procurar um usuário (por LOGIN ou por EMAIL)
     public function localizarUsuario(string $usuario): array

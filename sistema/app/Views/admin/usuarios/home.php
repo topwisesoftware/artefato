@@ -41,5 +41,4 @@
 
 <div id="lugar-modal"></div>
 
-
 <?= $this->endSection() ?>

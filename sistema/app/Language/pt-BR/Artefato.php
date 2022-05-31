@@ -24,6 +24,7 @@ return [
             'consultar' => 'Consultar',
             'editar' => 'Editar',
             'excluir' => 'Excluir',
+            'fechar' => 'Fechar',
         ],
         'campos' => [
             'status' => 'Status',

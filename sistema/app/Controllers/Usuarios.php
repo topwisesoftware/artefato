@@ -17,11 +17,18 @@ class Usuarios extends BaseController
         $data['usuarioLogado'] = TOPWISE_seguranca_UsuarioLogado();
         $data['dadosUsuarios'] = $usuariosModel->findAll();
         $data['dadosRegras'] = $regrasModel->findAll();
-
         $data['titulo'] = 'Gerenciar Usuários';
         $data['pagina'] = 'usuarios';
-        $data['modal_inserir_usuarios'] = TOPWISE_artefato_modal('admin/usuarios/modal_inserir_usuarios', 'inserir-usuarios', $data, 'lg');
         $data['tipo_janela_impressao'] = $configuracoesModel->tipo_janela_impressao();
+
+        // modal de insert
+        $data['modal_config'] = array (
+            'titulo' => lang('Artefato.crud.botoes.incluir') . ' ' . lang('Usuarios.geral.singular'),
+            'id' => 'inserir-usuarios',
+            'size' => 'lg',
+            'acao' => 'inserir',
+        );
+        $data['modal_inserir_usuarios'] = view('admin/usuarios/modal_usuarios', $data);
 
         return view('admin/usuarios/home.php', $data);
     }
@@ -48,6 +55,35 @@ class Usuarios extends BaseController
         }
         
         return view('admin/usuarios/listagem', $data);
+    }
+
+    public function editar() {
+        $usuariosModel = new UsuariosModel();
+        $regrasModel = new RegrasModel();
+        $configuracoesModel = new ConfiguracoesModel();
+
+        // preparando dados
+        $id = trim($_POST['id']);
+        $tp = trim($_POST['tp']);
+
+        $data['usuarioLogado'] = TOPWISE_seguranca_UsuarioLogado();
+        $data['dadosUsuarios'] = $usuariosModel->find($id);
+        $data['dadosRegras'] = $regrasModel->findAll();
+        $data['titulo'] = 'Gerenciar Usuários';
+        $data['pagina'] = 'usuarios';
+        $data['tipo_janela_impressao'] = $configuracoesModel->tipo_janela_impressao();
+        
+        //$data['erros'] = $this->form_validation->error_array();
+
+        // modal de atualização/consulta
+        $data['modal_config'] = array (
+            'titulo' => lang(($tp == '1') ? 'Artefato.crud.botoes.editar' : 'Artefato.crud.botoes.consultar') . ' ' . lang('Usuarios.geral.singular'),
+            'id' => 'editar-usuarios',
+            'size' => 'lg',
+            'acao' => ($tp == '1') ? 'editar' : 'consultar',
+        );
+        echo view('admin/usuarios/modal_usuarios', $data);
+       
     }
 
 }

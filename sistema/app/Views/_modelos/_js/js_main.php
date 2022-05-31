@@ -84,6 +84,7 @@
 		$('.msg').show(1000);
 		setTimeout(function() { $('.msg').fadeOut(1000); }, 3000);
 	}
+</script>
 
 <?php
 	// carrega apenas a lib de funções Ajax necessária para evitar desperdício
@@ -92,4 +93,3 @@
         echo $this->include('admin/' . strtolower($pagina) . '/js_' . strtolower($pagina));        
 	}
 ?>
-</script>

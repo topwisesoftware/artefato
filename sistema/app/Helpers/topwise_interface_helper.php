@@ -20,24 +20,6 @@ function TOPWISE_artefato_msg_erro($mensagem = '')
     return $conteudo;
 }
 
-// para ser usado ao chamar janelas modal
-// usado em todo o sistema
-function TOPWISE_artefato_modal($content='', $id='', $data='', $size='md') {
-    //$_ci =& get_instance();
-    //echo '>>>[' . print_r($data) . ']<<<';
-    if ($content != '') {
-        $view_content = view($content, $data); // $_ci->load->view($content, $data, TRUE);
-
-        return '<div class="modal fade" id="' .$id .'" role="dialog">
-                    <div class="modal-dialog modal-' .$size .'" role="document">
-                    <div class="modal-content">
-                        ' .$view_content .'
-                    </div>
-                    </div>
-                </div>';
-    }
-}
-
 function TOPWISE_retornaNivelAcesso($regra, $cor) {
 
     $codigo = '<span class="badge bg-' . $cor . '">';
