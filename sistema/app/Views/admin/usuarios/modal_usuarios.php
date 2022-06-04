@@ -11,26 +11,128 @@
     // tratamentos
     $exibir = in_array($acao, $conteudosValidos);
     $consultar = ($acao == 'consultar') ? 'disabled' : $vazio;
+
+    // campos
+    $campoLOGIN = array(
+        'componente' => 'input',
+        'tipo' => 'text',
+        'campo' => 'LOGIN',
+        'dados' => ($exibir) ? $dadosUsuarios->LOGIN : $vazio,
+        'label' => array(
+            'texto' => lang('Usuarios.geral.campos.login.nome'),
+        ),
+        'config' => array(
+            'dica' => lang('Usuarios.geral.campos.login.descricao'),
+            'class' => 'form-control',
+            'autocomplete' => 'off',
+            'style' => 'text-transform:uppercase;',
+            'autofocus' => TRUE,
+            'obrigatorio' => TRUE,
+            'grade' => 'col-sm-6',
+            'estado' => $consultar,
+        ),
+    );
+
+    $campoEMAIL = array(
+        'componente' => 'input',
+        'tipo' => 'email',
+        'campo' => 'EMAIL',
+        'dados' => ($exibir) ? $dadosUsuarios->EMAIL : $vazio,
+        'label' => array(
+            'texto' => lang('Usuarios.geral.campos.email.nome'),
+        ),
+        'config' => array(
+            'dica' => lang('Usuarios.geral.campos.email.descricao'),
+            'class' => 'form-control',
+            'autocomplete' => 'off',
+            'style' => 'text-transform:lowercase;',
+            'autofocus' => FALSE,
+            'obrigatorio' => TRUE,
+            'grade' => 'col-sm-6',
+            'estado' => $consultar,
+        ),
+    );
+
+    $campoNOME = array(
+        'componente' => 'input',
+        'tipo' => 'text',
+        'campo' => 'NOME',
+        'dados' => ($exibir) ? $dadosUsuarios->NOME : $vazio,
+        'label' => array(
+            'texto' => lang('Usuarios.geral.campos.nome.nome'),
+        ),
+        'config' => array(
+            'dica' => lang('Usuarios.geral.campos.nome.descricao'),
+            'class' => 'form-control',
+            'autocomplete' => 'off',
+            'style' => '',
+            'autofocus' => FALSE,
+            'obrigatorio' => TRUE,
+            'grade' => 'col-sm-12',
+            'estado' => $consultar,
+        ),
+    );
+
+    $campoTELEFONE = array(
+        'componente' => 'input',
+        'tipo' => 'text',
+        'campo' => 'TELEFONE',
+        'dados' => ($exibir) ? $dadosUsuarios->TELEFONE : $vazio,
+        'label' => array(
+            'texto' => lang('Usuarios.geral.campos.telefone.nome'),
+        ),
+        'config' => array(
+            'dica' => lang('Usuarios.geral.campos.telefone.descricao'),
+            'class' => 'form-control',
+            'autocomplete' => 'off',
+            'style' => '',
+            'autofocus' => FALSE,
+            'obrigatorio' => FALSE,
+            'grade' => 'col-sm-5',
+            'estado' => $consultar,
+        ),
+    );
+
+    $campoSENHA = array(
+        'componente' => 'input',
+        'tipo' => 'password',
+        'campo' => 'SENHA',
+        'dados' => ($exibir) ? '[47756bbae402385717293664a281ace9]' : $vazio,
+        'label' => array(
+            'texto' => lang('Usuarios.geral.campos.senha.nome'),
+        ),
+        'config' => array(
+            'dica' => lang('Usuarios.geral.campos.senha.descricao'),
+            'class' => 'form-control',
+            'autocomplete' => 'off',
+            'style' => '',
+            'autofocus' => FALSE,
+            'obrigatorio' => TRUE,
+            'grade' => 'col-sm-6',
+            'estado' => $consultar,
+            //'pattern' => '/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])[\w!@#$%&*()-_=+|<,>.;:?§ªº°¹²³£¢¬]{6,}$/',
+        ),
+        'mensagem' => array(
+            'cor' => 'text-info',
+            'texto' => lang('Usuarios.geral.campos.senha.info'),
+        )
+    );             
+
+
 ?>
 
 <?php if($acao == 'editar'): ?>
 
     <input type="hidden" name="ID" value="<?= $dadosUsuarios->ID ?>">
-    <input type="hidden" name="usuario_atual" value="<?= $dadosUsuarios->NOME ?>">
+    <input type="hidden" name="USER" value="<?= $dadosUsuarios->LOGIN ?>">
+    <input type="hidden" name="HASH" value="<?= topwise_gerar_senha($dadosUsuarios->ID . $dadosUsuarios->LOGIN) ?>">
 
 <?php endif ?>
 
 <div class="row">
 
-    <div class="form-group col-sm-6">
-        <label for="nome"><?= lang('Usuarios.geral.campos.login.nome') ?>:<i class="fas fa-star-of-life fa-sm ml-2 text-danger"></i></label>
-        <input type="text" class="form-control" placeholder="<?= lang('Usuarios.geral.campos.login.descricao') ?>" id="NOME" name="NOME" autocomplete="off" style="text-transform:uppercase;" value="<?= ($exibir) ? $dadosUsuarios->NOME : $vazio ?>" autofocus <?= $consultar ?>>
-    </div>
-
-    <div class="form-group col-sm-6">
-        <label for="nome"><?= lang('Usuarios.geral.campos.email.nome') ?>:<i class="fas fa-star-of-life fa-sm ml-2 text-danger"></i></label>
-        <input type="email" class="form-control" placeholder="<?= lang('Usuarios.geral.campos.email.descricao') ?>" id="EMAIL" name="EMAIL" autocomplete="off" style="text-transform:lowercase;" value="<?= ($exibir) ? $dadosUsuarios->EMAIL : $vazio ?>" <?= $consultar ?>>
-    </div>
+    <?= Componente($campoLOGIN) ?>
+    <?= Componente($campoEMAIL) ?>
 
 </div>
 
@@ -51,16 +153,9 @@
 
                     <div class="tab-pane fade show active" id="tab_1_<?= $acao ?>" role="tabpanel" aria-labelledby="tab_1_tab_<?= $acao ?>">
                         <div class="row">
-                            
-                            <div class="form-group col-sm-12">
-                                <label for="nome_completo"><?= lang('Usuarios.geral.campos.nome.nome') ?>:<i class="fas fa-star-of-life fa-sm ml-2 text-danger"></i></label>
-                                <input type="text" class="form-control" placeholder="<?= lang('Usuarios.geral.campos.nome.descricao') ?>" id="NOME_COMPLETO" name="NOME_COMPLETO" value="<?= ($exibir) ? $dadosUsuarios->NOME : $vazio ?>" <?= $consultar ?>>
-                            </div>
 
-                            <div class="form-group col-sm-5">
-                                <label for="nome"><?= lang('Usuarios.geral.campos.telefone.nome') ?>:</label>
-                                <input type="text" class="form-control" placeholder="<?= lang('Usuarios.geral.campos.telefone.descricao') ?>" id="TELEFONE" name="TELEFONE" value="<?= ($exibir) ? $dadosUsuarios->TELEFONE : $vazio ?>" <?= $consultar ?>>
-                            </div>
+                            <?= Componente($campoNOME) ?>
+                            <?= Componente($campoTELEFONE) ?>
 
                         </div>
                     </div> <!-- tab-pane -->
@@ -69,8 +164,8 @@
                         <div class="row">
 
                             <div class="form-group col-sm-12">
-                                <label><?= lang('Usuarios.geral.campos.permissao.nome') ?>:<i class="fas fa-star-of-life fa-sm ml-2 text-danger"></i></label>
-                                <select class="custom-select form-control" id="NVL_ACES" name="NVL_ACES" <?= $consultar ?>>
+                                <label for="NIVEL"><?= lang('Usuarios.geral.campos.permissao.nome') ?>:<i class="fas fa-star-of-life fa-sm ml-2 text-danger"></i></label>
+                                <select class="custom-select form-control" id="NIVEL" name="NIVEL" <?= $consultar ?>>
 
                                     <?php foreach ($dadosRegras as $regra) : ?>
                                         <?php if(OK($usuarioLogado->NIVEL, $regra->PERMISSAO)) : ?>
@@ -81,14 +176,10 @@
                                 </select>
                             </div>
 
-                            <div class="form-group col-sm-6">
-                                <label for="nome"><?= lang('Usuarios.geral.campos.senha.nome') ?>:<i class="fas fa-star-of-life fa-sm ml-2 text-danger" id="senhareq" style="display: none;"></i></label>
-                                <input type="password" class="form-control" placeholder="<?= lang('Usuarios.geral.campos.senha.descricao') ?>" id="SENHA" name="SENHA" autocomplete="off" value="<?= ($exibir) ? $dadosUsuarios->TELEFONE : '[47756bbae402385717293664a281ace9]' ?>" <?= $consultar ?>>
-                                <p class="help-block text-info small"><?= lang('Usuarios.geral.campos.senha.info') ?></p>
-                            </div>
+                            <?= Componente($campoSENHA) ?>
 
                             <div class="form-group col-sm-6">
-                                <label><?= lang('Usuarios.geral.campos.idioma.nome') ?>:<i class="fas fa-star-of-life fa-sm ml-2 text-danger"></i></label>
+                                <label for="IDIOMA"><?= lang('Usuarios.geral.campos.idioma.nome') ?>:<i class="fas fa-star-of-life fa-sm ml-2 text-danger"></i></label>
                                 <select class="custom-select form-control" id="idioma" name="IDIOMA" <?= $consultar ?>>
                                     <option value="portuguese-br" <?php if($exibir) { echo (($dadosUsuarios->IDIOMA == 'portuguese-br') ? 'selected' : $vazio); } else { echo 'selected'; } ?>>Português</option>
                                     <option value="english" <?php if($exibir) { echo (($dadosUsuarios->IDIOMA == 'english') ? 'selected' : $vazio); } else { echo $vazio; } ?>>English</option>
@@ -108,33 +199,7 @@
 
 <script type="text/javascript">
     $(function () {
-        function verificarCampos() {
-            var sist = $('#NVL_ACES').val();
 
-            if(sist) {
-                if((sist == "INATIVO")) {
-                    $('#senhareq').hide();
-                    $("#SENHA").attr("disabled", true);
-                    $('#nvlreq').hide();
-                } else {
-                    $('#nvlreq').show();
-
-                    if((sist == "INATIVO") || (sist == "EXTRA")) {
-                        $('#senhareq').hide();
-                        $("#SENHA").attr("disabled", true);
-                    } else {
-                        $('#senhareq').show();
-                        $("#SENHA").attr("disabled", false);
-                    }
-
-                }
-            }
-        }
-
-        verificarCampos();
-
-        $('#NVL_ACES').change(function() {
-            verificarCampos();
-        });
+        
     });
 </script>

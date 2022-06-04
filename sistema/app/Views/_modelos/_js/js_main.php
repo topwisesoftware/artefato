@@ -7,7 +7,7 @@
 	// paginas que não precisam ter um arquivo ajax
 	// devem ser adicinadas aqui
 	$paginas_excluidas = array(
-		"home",
+		"admin",
 		"perfil",
 	)
 

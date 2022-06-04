@@ -14,10 +14,12 @@
                 </td>
                 <td>
                     <button type="button" class="btn btn-outline-primary btn-xs consultar-dadosUsuarios mr-1" data-id="<?= $usuario->ID ?>"><i class="far fa-eye"></i> <?= lang('Artefato.crud.botoes.consultar') ?></button>
-                    <?php //if(OK($usuarioLogado->NIVEL,  'ADMINISTRADOR') { ?>
+                    <?php if(OK($usuarioLogado->NIVEL,  'ADMINISTRADOR')) : ?>
                         <button type="button" class="btn bg-gradient-success btn-xs editar-dadosUsuarios mr-3" data-id="<?= $usuario->ID ?>"><i class="far fa-edit"></i> <?= lang('Artefato.crud.botoes.editar') ?></button>
-                        <button type="button" class="btn btn-outline-danger btn-xs confirmarExcluir-usuarios" data-id="<?= $usuario->ID ?>" data-nome="<?= $usuario->NOME ?>"><i class="fas fa-trash" data-toggle="modal" data-target="#confirmarExclusao"></i> <?= lang('Artefato.crud.botoes.excluir') ?></button>
-                    <?php //} ?>
+                    <?php endif; ?>
+                    <?php if(OK($usuarioLogado->NIVEL,  'DESENVOLVEDOR')) : ?>
+                        <button type="button" class="btn btn-outline-danger btn-xs confirmarExcluir-usuarios" data-id="<?= $usuario->ID ?>" data-nome="<?= $usuario->NOME ?>" <?= ($usuario->NIVEL == 'DESENVOLVEDOR') ? 'disabled' : '' ?>><i class="fas fa-trash" data-toggle="modal" data-target="#confirmarExclusao"></i> <?= lang('Artefato.crud.botoes.excluir') ?></button>
+                    <?php endif; ?>
                 </td>
             </tr>
         <?php

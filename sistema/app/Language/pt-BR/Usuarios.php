@@ -33,7 +33,7 @@ return [
             'senha' => [
                 'nome' => 'Senha',
                 'descricao' => 'Informe uma Senha',
-                'info' => 'A senha deve ter no mínimo 6 caracteres.',
+                'info' => 'A senha deve conter no mínimo: 6 caracteres, 1 letra maiúscula,<br>1 letra minúscula, 1 número, 1 símbolo - EXEMPLO: Senh4#0rt3',
             ],
             'idioma' => [
                 'nome' => 'Idioma',

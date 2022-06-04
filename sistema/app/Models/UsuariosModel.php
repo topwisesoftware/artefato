@@ -20,17 +20,11 @@ class UsuariosModel extends Model
         'SENHA',
         'NOME',
         'TELEFONE',
-            'FOTO',
-            'IDIOMA',
-            'EXCLUIDO',
-            'USUCADASTRO',
-            'USUALTERACAO',
-            'USUEXCLUSAO',
-                'DATACADASTRO',
-                'DATAALTERACAO',
-                'DATAEXCLUSAO'
+        'FOTO',
+        'IDIOMA'
     ];
 
+    protected $useSoftDeletes = TRUE;    
     protected $useTimestamps = TRUE;
     protected $createdField  = 'DATACADASTRO';
     protected $updatedField  = 'DATAALTERACAO';
@@ -42,7 +36,18 @@ class UsuariosModel extends Model
         'NOME' => 'required',
     ];
     protected $validationMessages = [
-        'LOGIN' => 'Login'
+        'LOGIN' => [
+            'required' => 'Um nome de LOGIN é necessário',
+            'min_length[3]' => 'O LOGIN deve ter mais de 3 caracteres',
+            'is_unique' => 'Outro usuário já utiliza este LOGIN'
+        ],
+        'EMAIL' => [
+            'required' => 'Um EMAIL é necessário',
+            'valid_email' => 'O EMAIL não é válido'
+        ],
+        'NOME' => [
+            'required' => 'Um NOME é necessário',
+        ],
     ];
     protected $skipValidation = false;
 
@@ -75,7 +80,7 @@ class UsuariosModel extends Model
     public function todos()
     {
         $db = db_connect();
-        $builder = $db->table('view_usuarios');
+        $builder = $db->table('view_usuarios')->where('DATAEXCLUSAO', NULL);
         $query   = $builder->get();
 
         return $query->getResult();

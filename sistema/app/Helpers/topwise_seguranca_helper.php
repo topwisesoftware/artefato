@@ -85,26 +85,35 @@
 		return strrev(sha1(TOPWISE__CHAVE_PRIVADA . $entrada . TopWise_App_Chave_Local()));
 	}
 
+    // analizar a senha informada e calcular se ela é válida
+    // regras:
+    //          + que 6 caracteres
+    //          pelo menos um número           > 0123456789
+    //          pelo menos uma letra minúscula > abcdefghijklmnopqrstuvwxyz
+    //          pelo menos uma letra maiúscula > ABCDEFGHIJKLMNOPQRSTUVWXYZ
+    //          pelo menos um símbolo          > !@#$%&*()-_=+{}|<,>.;:?§ªº°¹²³£¢¬
+    function topwise_checar_senha(string $entrada): bool
+    {
+        return    preg_match('/[a-z]/', $entrada) // tem pelo menos uma letra minúscula
+               && preg_match('/[A-Z]/', $entrada) // tem pelo menos uma letra maiúscula
+               && preg_match('/[0-9]/', $entrada) // tem pelo menos um número
+               && preg_match('/^[\w!@#$%&*()-_=+|<,>.;:?§ªº°¹²³£¢¬]{6,}$/', $entrada); // tem 6 ou mais caracteres
+               // tudo junto '/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])[\w!@#$%&*()-_=+|<,>.;:?§ªº°¹²³£¢¬]{6,}$/'
+    }
+
+    
+
     // 255 caracteres no máximo
     function topwise_gerar_senha(string $entrada): string
     {
-        $cost = topwise_calcular_custo();
-        $hash_preparada = topwise_preparar_senha($entrada);
-        $hash = password_hash($senha_banco_final, PASSWORD_BCRYPT, ["cost" => $cost]);
-        return $hash;
+        return password_hash(topwise_preparar_senha($entrada), PASSWORD_BCRYPT, ["cost" => topwise_calcular_custo()]);
     }
 
-    function topwise_verificar_senha(string $senha, $verificacao): bool
+    function topwise_verificar_senha(string $entrada, $criptografia): bool
     {
-        $cost = topwise_calcular_custo();
-        $hash_senha = topwise_preparar_senha($senha);
-        $resultado = password_verify($hash_senha, $verificacao);
-        return $resultado;
+        return password_verify(topwise_preparar_senha($entrada), $criptografia);
     }
 
-
-
-    
     // **********************************************************************************************************************//
 
     function topwise_preparar_senha(string $entrada): string

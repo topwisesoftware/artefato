@@ -9,13 +9,13 @@
     
     <div class="card-header">
         
-        <?php //if(OK($userdata, 'COMERCIAL')) { ?>
+        <?php if(OK($usuarioLogado->NIVEL,  'EQUIPE')) : ?>
             <a href="<?= base_url('/Usuarios/Relatorio/listagem') ?>" class="btn bg-gradient-info mr-2" target="_blank" <?php if($tipo_janela_impressao == 'POPUP') { ?> onclick="window.open('<?= base_url('/Usuarios/Relatorio/listagem') ?>', 'newwindow', 'width=800,height=600'); return false;" <?php } ?>><i class="fas fa-print mr-2"></i><?= lang('Artefato.crud.botoes.listagem') ?></a>
-        <?php //} ?>
+        <?php endif; ?>
 
-        <?php //if(OK($userdata, 'COMERCIAL')) { ?>
+        <?php if(OK($usuarioLogado->NIVEL,  'EQUIPE')) : ?>
             <button type="button" class="btn bg-gradient-primary float-right" id="btn-incluir-usuarios" data-toggle="modal" data-target="#inserir-usuarios"><i class="fas fa-user-plus mr-2"></i><?= lang('Artefato.crud.botoes.incluir') ?> <?= lang('Usuarios.geral.singular') ?></button>
-        <?php //} ?>
+        <?php endif; ?>
 
     </div> <!-- /.box-header -->
 

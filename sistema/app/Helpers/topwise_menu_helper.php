@@ -5,25 +5,23 @@ function TOPWISE_menu($pagina)
 
     $menu = new Menu($pagina);
 
-    /*
     $menu->addCab('Principal');
-        $menu->addItem('Agendamento', 'fas fa-clock', 'Agendamento', 'teste');
-        $menu->addItem('Agendamento Cliente', 'fas fa-clock', 'Agendamento/Cliente', 'agendamentocliente');
-        $menu->addItem('Status Cliente', 'fas fa-search', 'Agendamento/Status', 'status');
-    */
+    $menu->addItem('Clientes', 'fas fa-user', 'clientes', 'clientes');
+        //$menu->addItem('Agendamento', 'fas fa-clock', 'Agendamento', 'teste');
+        //$menu->addItem('Agendamento Cliente', 'fas fa-clock', 'Agendamento/Cliente', 'agendamentocliente');
+        //$menu->addItem('Status Cliente', 'fas fa-search', 'Agendamento/Status', 'status');
 
 
     $menu->addCab('Gerenciamento');
+        $menu->addItem('Usuários', 'fas fa-user-friends', 'usuarios', 'usuarios');
         //$menu->addItem('Liberações Pendentes', 'fas fa-calendar-check', 'Agendamento/Liberacoes', 'liberacoes', '', 0, 'badgerPlacar');
         //$menu->addItem('Relatórios', 'fas fa-list-alt', 'Agendamento/Relatorio', 'relatorio');
         //$menu->addItem('Configurações', 'fas fa-cog', 'Configuracao', 'configuracao');
-        $menu->addItem('Usuários', 'fas fa-user-friends', 'usuarios', 'usuarios');
 
-    /*
-    $menu->addCab('Outros');
-    $menu->addItem('Cadastro', 'fas fa-address-book', 'Cadastro', 'cadastro');
-    $menu->addItem('Funções', 'fas fa-id-badge', 'Funcao', 'funcao');
-    */
+    //$menu->addCab('Outros');
+        //$menu->addItem('Cadastro', 'fas fa-address-book', 'Cadastro', 'cadastro');
+        //$menu->addItem('Funções', 'fas fa-id-badge', 'Funcao', 'funcao');
+
     $menu->addCab('Sistema');
     $menu->addItem('Sair...', 'fas fa-sign-out-alt', '', '', 'menuSair');
 

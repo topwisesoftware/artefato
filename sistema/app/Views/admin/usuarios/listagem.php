@@ -22,7 +22,7 @@
                 <th><?= lang('Usuarios.geral.campos.foto.nome') ?>?</th>
             </tr>
         </thead>
-        <tbody id="dados-funcionario">
+        <tbody id="dados-relatorio">
 
             <?php foreach ($dadosUsuarios as $usuario) { ?>
                 <tr>

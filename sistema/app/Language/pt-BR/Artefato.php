@@ -37,6 +37,22 @@ return [
             'alfabetica' => 'por Ordem Alfabética ~ sem filtros',
         ],
         'mensagens' => [
+            'salvar' => [
+                'sucesso' => 'Registro salvo com sucesso!',
+                'erro' => 'Erro ao salvar registro!',
+                'semdados' => 'Não existem dados suficientes para salvar registro.',
+                'erro_GERAL' => 'Erro geral! Reinicie o sistema e tente novamente!',
+                'nada' => 'Nada foi alterado!'
+            ],
+            'editar' => [
+                'erro_ID' => 'O campo ID precisa existir em uma edição.',
+                'erro_HASH' => 'Os campos de verificação precisam existir em uma edição.',
+                'erro_CRIPTO' => 'Problemas na verificação de segurança da edição.',
+                'erro_SENHA' => 'A SENHA não atende aos requisios básicos de segurança solicitados. Verifique!',
+            ],
+            'incluir' => [
+                'erro_ID' => 'O campo ID não pode existir em uma inclusão.',
+            ],
             'excluir' => [
                 'excluindo' => 'Excluindo',
                 'sim' => 'Sim, excluir!',
@@ -52,7 +68,9 @@ return [
                 'registro' => 'Registro',
                 'verifique' => 'Verifique!',
                 'cancelar' => 'NÃO, CANCELAR!',
-            ]
+                'ok' => 'Tudo certo!',
+                'erro' => 'Ocorreu um erro! Verifique!'
+            ],
         ],
     ],
     'relatorios' => [

@@ -1,5 +1,5 @@
 <?php
-    $entidade = 'Usuarios';
+    $entidade = 'Clientes';
 ?>
 <script type="text/javascript">
     // _modelos/_js/js_<?= $pagina ?>
