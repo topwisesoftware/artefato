@@ -48,34 +48,34 @@ Vagrantfile
 #-------------------------
 # Temporary Files
 #-------------------------
-/sistema/writable/cache/*
-!/sistema/writable/cache/index.html
+writable/cache/*
+!writable/cache/index.html
 
-/sistema/writable/logs/*
-!/sistema/writable/logs/index.html
+writable/logs/*
+!writable/logs/index.html
 
-/sistema/writable/session/*
-!/sistema/writable/session/index.html
+writable/session/*
+!writable/session/index.html
 
-/sistema/writable/uploads/*
-!/sistema/writable/uploads/index.html
+writable/uploads/*
+!writable/uploads/index.html
 
-/sistema/writable/debugbar/*
+writable/debugbar/*
 
 php_errors.log
 
 #-------------------------
 # User Guide Temp Files
 #-------------------------
-/sistema/user_guide_src/build/*
-/sistema/user_guide_src/cilexer/build/*
-/sistema/user_guide_src/cilexer/dist/*
-/sistema/user_guide_src/cilexer/pycilexer.egg-info/*
+user_guide_src/build/*
+user_guide_src/cilexer/build/*
+user_guide_src/cilexer/dist/*
+user_guide_src/cilexer/pycilexer.egg-info/*
 
 #-------------------------
 # Test Files
 #-------------------------
-/sistema/tests/coverage*
+tests/coverage*
 
 # Don't save phpunit under version control.
 phpunit
@@ -83,16 +83,13 @@ phpunit
 #-------------------------
 # Composer
 #-------------------------
-/sistema/vendor/*
-/site/vendor/*
-composer.lock
+vendor/
 
 #-------------------------
 # IDE / Development Files
 #-------------------------
 
 # Modules Testing
-/sistema/_modules/*
 _modules/*
 
 # phpenv local config
@@ -128,13 +125,12 @@ nb-configuration.xml
 /phpunit*.xml
 /.phpunit.*.cache
 
-
 #-------------------------
 # Topwise
 #-------------------------
 # Arquivos que devem ser ignorados pelo git
-/sistema/vendor/*
+/public/vendor/*
 /site/vendor/*
 /site/.htaccess
 /site/assets/img/usuarios/*
-/_dados/*
+/_trabalho/*
