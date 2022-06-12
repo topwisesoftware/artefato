@@ -9,7 +9,7 @@
     'campo' => 'JANELA',
     'dados' => $dadosConfiguracoes->TIPO_JANELA_IMPRESSAO,
     'label' => array(
-        'texto' => 'Como serão exibidos os relatórios',
+        'texto' => lang('Configuracoes.campos.impressao.descricao'),
     ),
     'config' => array(
         'class' => 'custom-select form-control',
@@ -19,12 +19,12 @@
     ),
     'opcoes' => array(
         'ABA' => array(
-            'descricao' => 'Abas - Abas na mesma janela do navegador',
+            'descricao' => lang('Configuracoes.campos.impressao.opcoes.aba'),
             'cor' => '',
             'padrao' => 'S',
         ),
         'POPUP' => array(
-            'descricao' => 'PopUps - Em uma janela flutuante',
+            'descricao' => lang('Configuracoes.campos.impressao.opcoes.popup'),
             'cor' => '',
             'padrao' => 'N',
         ),
@@ -36,7 +36,7 @@
       'campo' => 'MODO',
       'dados' => $dadosConfiguracoes->MODO,
       'label' => array(
-          'texto' => 'Tema Padrão do Aplicativo',
+          'texto' => lang('Configuracoes.campos.modo.descricao'),
       ),
       'config' => array(
           'class' => 'custom-select form-control',
@@ -92,9 +92,9 @@
     <div id="reiniciar" class="col-xl-12 col-lg-12 col-md-12 col-xs-12" style="display: none;"> <!-- /.col -->
         <div class="alert alert-warning alert-dismissible">
             <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-            <h5><i class="icon fas fa-exclamation-triangle"></i> Atenção!</h5>
-            <a href="<?= base_url('login/sair') ?>"><button type="button" class="btn btn-outline-danger mr-2">Reiniciar agora</button></a>
-            Reinicie o sistema para que as alterações tenham efeito!
+            <h5><i class="icon fas fa-exclamation-triangle"></i> <?= lang('Configuracoes.mensagens.atencao') ?></h5>
+            <a href="<?= base_url('login/sair') ?>"><button type="button" class="btn btn-outline-danger mr-2"><?= lang('Configuracoes.botoes.reiniciar') ?></button></a>
+            <?= lang('Configuracoes.mensagens.reiniciar') ?>
         </div>
     </div>
 
@@ -104,13 +104,13 @@
             <div class="card-header p-2">
 
                 <ul class="nav nav-pills">
-                    <li class="nav-item"><a class="nav-link active" href="#timeline" data-toggle="tab">Relatórios</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#activity" data-toggle="tab">Geral</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="#timeline" data-toggle="tab"><?= lang('Configuracoes.abas.relatorios') ?></a></li>
+                    <li class="nav-item"><a class="nav-link" href="#activity" data-toggle="tab"><?= lang('Configuracoes.abas.geral') ?></a></li>
                 </ul>
 
             </div><!-- /.card-header -->
 
-            <form id="form-editar-config" action="<?= base_url('configuracao/editar') ?>" method="POST" autocomplete="on">
+            <form id="form-editar-config" action="<?= base_url('configuracoes/salvar') ?>" method="POST" autocomplete="on">
 
                 <div class="card-body">
                     <div class="tab-content">
@@ -126,6 +126,7 @@
 
                             <!-- TAB2 -->
                             <?= componente($campoJANELA) ?>
+
                         </div> <!-- /.tab-pane -->
 
                     </div> <!-- /.tab-content -->
@@ -133,8 +134,8 @@
                 </div> <!-- /.card-body -->
 
                 <div class="card-footer">
-                    <p class="float-left"><i class="fas fa-exclamation-circle fa-lg ml-2 text-warning"></i> Qualquer alteração efetuada aqui só tem efeito ao sair e retornar do sistema.</p>
-                    <button type="submit" class="btn btn-primary float-right"> <i class="fas fa-save mr-2"></i></i> Atualizar Configurações</button>
+                    <p class="float-left"><i class="fas fa-exclamation-circle fa-lg ml-2 text-warning"></i> <?= lang('Configuracoes.mensagens.aviso') ?></p>
+                    <button type="submit" class="btn btn-primary float-right"> <i class="fas fa-save mr-2"></i></i> <?= lang('Configuracoes.botoes.atualizar') ?></button>
                 </div>
 
             </form>
@@ -145,6 +146,5 @@
 
     </div>
 </div> <!-- row -->
-
 
 <?= $this->endSection() ?>

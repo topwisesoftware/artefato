@@ -8,8 +8,7 @@
 	// devem ser adicinadas aqui
 	$paginas_excluidas = array(
 		"admin",
-		"perfil",
-		"configuracoes",
+		"perfil"
 	)
 
 	//// GERAL

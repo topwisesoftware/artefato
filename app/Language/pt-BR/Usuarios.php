@@ -41,7 +41,7 @@ return [
             ],
             'idioma' => [
                 'nome' => 'Idioma',
-                'descricao' => 'Informe uma Idioma Padrão',
+                'descricao' => 'Informe um Idioma Padrão',
             ],
             'modo' => [
                 'nome' => 'Tema do Aplicativo',

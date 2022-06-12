@@ -17,6 +17,7 @@ class ConfiguracoesModel extends Model
     protected $allowedFields    = [
         'TIPO_JANELA_IMPRESSAO',
         'IDIOMA',
+        'MODO',
     ];
 
     // Dates

@@ -47,7 +47,7 @@ $routes->get('/', 'Admin::index');
 
 // Configurações
 $routes->get('/configuracoes', 'Configuracoes::index');
-$routes->get('/configuracoes/salvar', 'Configuracoes::salvar');
+$routes->post('/configuracoes/salvar', 'Configuracoes::salvar');
 
 // Perfil
 $routes->get('/perfil', 'Perfil::index');
