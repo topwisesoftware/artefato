@@ -247,7 +247,7 @@
         'campo' => 'userfile',
         'imagem' => array(
             'componente' => 'img',
-            'id' => 'foto_usuario',
+            'id' => 'fotoUsuarios',
             'pasta' => 'usuarios',
             'imagem' => ($dadosUsuarios->FOTO == 1 ? $dadosUsuarios->ID : -1),
             'classe' => 'img-fluid img-circle img-thumbnail',
@@ -267,6 +267,8 @@
         'instrucoes' => '<b class="text-danger">ATENÇÃO!!</b> A imagem escolhida para a foto deve ser <b>JPG</b> no tamanho de <b>300px x 300px</b> com resolução de até <b>96 dpi</b>. Imagens muito grandes serão diminuidas/cortadas para estas configurações/proporções, mas dependendo do caso, podem gerar erros no sistema.',
     );
 
+    // configurações do form
+    $entidade = 'Usuarios';
 
     // obtendo mensagens
     $saida = session()->getFlashData('saida');
@@ -417,54 +419,53 @@
         <?php endif; ?>
     </div>
 
-    <script type="text/javascript">
-    $(function () {
+    <script>
+        $(function () {
+            $('#userfile').change(function(e){
+                e.preventDefault(); 
+            
+                var dadosArquivo = new FormData();
+                id_objeto = $(this).attr("data-id");
 
-        $('#userfile').change(function(e){
-            e.preventDefault(); 
-            files = e.target.files;
-            var formData = new FormData(), file = [];
+                dadosArquivo.append('userfile', $('input[type=file]')[0].files[0]);
 
-            formData.append('userfile', e.target.files[0]);
-
-            $.ajax({
-                url: '<?= base_url('perfil/alterarfoto') ?>',
-                cache: false,
-                contentType: false,
-                processData:false,
-                data: formData,
-                type: "post",
-                //async:false,
-                success: function(data){
-                    d = new Date();
-                    var out = jQuery.parseJSON(data);
-                    $("#foto_mini").removeAttr("src").attr("src",out.foto + d.getTime());
-                    $("#foto_perfil").removeAttr("src").attr("src",out.foto + d.getTime());
-                    $("#foto_exp").removeAttr("src").attr("src",out.foto + d.getTime());
-                    $("#foto_usuario").removeAttr("src").attr("src",out.foto + d.getTime());
-                    
-                    Swal.fire({
-                        title: out.tit,
-                        text: out.msg,
-                        type: out.status, 
-                        timer: 4000,
-                        showConfirmButton: false
-                    })
-                },
-                error: function(data){
-                    var out = jQuery.parseJSON(data);
-                    Swal.fire({
-                        title: out.tit,
-                        text: out.msg,
-                        type: out.status, 
-                        timer: 4000,
-                        showConfirmButton: true
-                    })
-                }
+                $.ajax({
+                    url: '<?= base_url(Strtolower($entidade) . '/salvarfoto'); ?>' + '/' + id_objeto,
+                    cache: false,
+                    contentType: false,
+                    processData:false,
+                    data: dadosArquivo,
+                    type: "post",
+                    //async:false,
+                    success: function(data){
+                        d = new Date();
+                        var out = jQuery.parseJSON(data);
+                        $("#foto<?= $entidade ?>").removeAttr("src").attr("src",out.foto);
+                        $("#foto_exp").removeAttr("src").attr("src",out.foto);
+                        $("#foto_mini").removeAttr("src").attr("src",out.foto);
+                        $("#foto_perfil").removeAttr("src").attr("src",out.foto);
+                        
+                        Swal.fire({
+                            title: out.titulo,
+                            text: out.msg,
+                            icon: out.icone, 
+                            timer: 4000,
+                            showConfirmButton: false
+                        })
+                    },
+                    error: function(data){
+                        var out = jQuery.parseJSON(data);
+                        Swal.fire({
+                            title: out.titulo,
+                            text: out.msg,
+                            icon: out.icone, 
+                            timer: 4000,
+                            showConfirmButton: true
+                        })
+                    }
+                });
             });
         });
-    });
-
-</script>    
+    </script>  
 
 <?= $this->endSection() ?>

@@ -332,6 +332,7 @@
     </div> <!-- ./col -->
 </div> <!-- ./row -->
 
+<?php if($acao == 'editar'): ?>
 <script>
     $(function () {
         $('#userfile').change(function(e){
@@ -378,5 +379,6 @@
         });
     });
 </script>
+<?php endif; ?>
 
 <?= $this->endSection() ?>
