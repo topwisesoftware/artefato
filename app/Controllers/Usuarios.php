@@ -29,7 +29,7 @@ class Usuarios extends BaseController
         $data['modal_config'] = array (
             'titulo' => lang('Artefato.crud.botoes.incluir') . ' ' . lang('Usuarios.geral.singular'),
             'id' => 'inserir-usuarios',
-            'size' => 'lg',
+            'size' => 'xl',
             'acao' => 'inserir',
         );
         $data['modal_inserir_usuarios'] = view('admin/usuarios/modal_usuarios', $data);
@@ -88,7 +88,7 @@ class Usuarios extends BaseController
         $data['modal_config'] = array (
             'titulo' => lang(($tp == '1') ? 'Artefato.crud.botoes.editar' : 'Artefato.crud.botoes.consultar') . ' ' . lang('Usuarios.geral.singular'),
             'id' => 'editar-usuarios',
-            'size' => 'lg',
+            'size' => 'xl',
             'acao' => ($tp == '1') ? 'editar' : 'consultar',
         );
         echo view('admin/usuarios/modal_usuarios', $data);
@@ -269,93 +269,60 @@ class Usuarios extends BaseController
     }    
 
     function processarfoto($id){
-
-        // configurações iniciais
-        $valor_upload = 1; // valor a ser atualizado no BD
-        $out['tit'] = $this->lang->line('cibase_crud_ok');
-        $out['msg'] = $this->lang->line('cibase_crud_foto_sucesso');
-        $out['status'] = "success";
-        $out['erro'] = 0;
+        $usuariosModel = new UsuariosModel();
 
         // configuração do download
-        $config['upload_path'] = './assets/img/usuarios/';
-        $config['allowed_types'] = 'jpg';
-        $topMD5id = topwiseMD5($id);
-        $config['file_name'] = $topMD5id . '.jpg';
-        $data['nome_arquivo'] = $topMD5id . '.jpg';
-        $config['overwrite'] = TRUE;
+        $uploadPath = 'assets/img/usuarios/';
 
-        $out['foto'] = base_url() . "assets/img/usuarios/" . $config['file_name'] . '?' . topwiseMD5(date('Y-m-d H:i'));
-        //$config['encrypt_name'] = TRUE;
-        $this->load->library('upload',$config);
+        //$arquivo = $this->request->getFile('userfile');
+        $validarImagem = $this->validate([
+            'userfile' => [
+                'uploaded[userfile]',
+                'max_size[userfile,8192]',
+                'mime_in[userfile,image/png,image/jpg,image/jpeg,image/gif]',
+                'ext_in[userfile,png,jpg,jpeg,gif]',
+                'max_dims[userfile,1024,768]',
+            ]
+        ]);
 
-        // faz o upload e testa
-        if($this->upload->do_upload("userfile")){
-            // se deu certo...
-
-            // inicia as configurações para redimencionamento da foto
-            $upload_data = $this->upload->data();
-            $config2['source_image'] = './assets/img/usuarios/' . $topMD5id . '.jpg';
-            $config2['create_thumb'] = FALSE;
-            $config2['width'] = 300;
-            $config2['height'] = 300;
-            $dim = ((intval($upload_data["image_width"]) / intval($upload_data["image_height"])) - ($config2['width'] / $config2['height']));
-            $config2['master_dim'] = ($dim > 0) ? 'height' : 'width';
-
-            $this->load->library('image_lib', $config2);
-
-            // redimensiona a foto e testa
-            if($this->image_lib->resize()){
-                // se deu certo
-
-                // inicia as configurações para o corte da imagem
-                $image_config['image_library'] = 'gd2';
-                $image_config['source_image'] = './assets/img/usuarios/' . $topMD5id . '.jpg';
-                $image_config['new_image'] = './assets/img/usuarios/' . $topMD5id . '.jpg';
-                $image_config['quality'] = "100%";
-                $image_config['maintain_ratio'] = FALSE;
-                $image_config['width'] = 300;
-                $image_config['height'] = 300;
-                $image_config['x_axis'] = $config2['master_dim'] = ($dim > 0) ? '50' : '0';
-                $image_config['y_axis'] = $config2['master_dim'] = ($dim > 0) ? '0' : '50';
-
-                // inicializando a lib
-                $this->image_lib->clear();
-                $this->image_lib->initialize($image_config); 
-                 
-                // faz o corte e testa
-                if (!$this->image_lib->crop()){
-                    // se não deu certo... 
-
-                    $valor_upload = 0; // em qualquer erro marcar foto como 0
-                    $out['tit'] = $this->lang->line('cibase_crud_erro');
-                    $out['msg'] = $this->lang->line('cibase_crud_foto_erro_crop') . $this->upload->display_errors();
-                    $out['status'] = "error";
-                    $out['erro'] = 3;
-                }
-            } else {
-                // se não deu certo...
-
-                $valor_upload = 0; // em qualquer erro marcar foto como 0
-                $out['tit'] = $this->lang->line('cibase_crud_erro');
-                $out['msg'] = $this->lang->line('cibase_crud_foto_erro_resize') . $this->upload->display_errors();
-                $out['status'] = "error";
-                $out['erro'] = 2;
-            }
+        if(!$validarImagem) {
+            // problemas ao salvar...
+            $saida['estado'] = 'form';
+            $saida['titulo'] = 'Erro ao validar o arquivo enviado!';
+            $saida['msg'] = 'Erro na validação' . ' - ID 001';
+            $saida['icone'] = 'error';
+            $saida['foto'] = '';
+            $saida['erros'] = [];
         } else {
-            // se upload não deu certo...
+            // obtem o arquivo
+            $arquivo = $this->request->getFile('userfile');
 
-            $valor_upload = 0; // em qualquer erro marcar foto como 0
-            $out['tit'] = $this->lang->line('cibase_crud_erro');
-            $out['msg'] = $this->lang->line('cibase_crud_foto_erro_upload') . $this->upload->display_errors();
-            $out['status'] = "error";
-            $out['erro'] = 1;
+            // prepara, redimensiona e salva no disco
+            $image = \Config\Services::image()
+                ->withFile($arquivo)
+                ->resize(300, 300, true, 'height')
+                ->save(FCPATH . $uploadPath . topwise_MD5($id) . '.jpg');
+
+            // salvando
+            if($usuariosModel->update($id, ['FOTO' => 1])) {
+                // tudo certo
+                $saida['estado'] = 'ok';
+                $saida['titulo'] = lang('Artefato.crud.mensagens.geral.ok');
+                $saida['msg'] = 'Foto atualizada com sucesso!';
+                $saida['icone'] = "success";
+                $saida['foto'] = base_url($uploadPath . topwise_MD5($id) . '.jpg?' . topwise_MD5(date('Y-m-d H:i')));
+                $saida['erros'] = [];
+            } else {
+                // problemas...
+                $saida['estado'] = 'form';
+                $saida['titulo'] = lang('Artefato.crud.mensagens.geral.erro');
+                $saida['msg'] = 'Erro ao salvar imagem' . '- ID 002';
+                $saida['icone'] = 'error';
+                $saida['foto'] = '';
+                $saida['erros'] = $usuariosModel->errors();
+            }
         }
 
-        // se houve upload de foto com sucesso
-        $this->M_usuario->marcarfoto($id, $valor_upload); // marcar a foto
-
-        // tratamento de erros
-        echo json_encode($out);
+        echo json_encode($saida);
      }    
 }

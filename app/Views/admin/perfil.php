@@ -12,7 +12,7 @@
         'estilo' => '',
         'descricao' => lang('Artefato.perfil.textos.descricaoFoto'),
         'titulo' => $dadosUsuarios->NOME,
-        'cripto' => FALSE,
+        'cripto' => TRUE,
     );
 
     $campoNOME = array(
@@ -152,7 +152,7 @@
     $botaoSalvarAlteracoes = array(
         'componente' => 'button',
         'tipo' => 'submit',
-        'texto' => lang('Artefato.crud.botoes.salvaralt'),
+        'texto' => lang('Perfil.botoes.salvar'),
         'cor' => 'primary',
         'icone' => 'fas fa-save mr-2',
         'classe' => '',
@@ -161,7 +161,7 @@
     $botaoAlterarSenha = array(
         'componente' => 'button',
         'tipo' => 'submit',
-        'texto' => lang('Artefato.crud.botoes.senha'),
+        'texto' => lang('Perfil.botoes.senha'),
         'cor' => 'danger',
         'icone' => 'fas fa-save mr-2',
         'classe' => '',
@@ -234,8 +234,8 @@
             'estado' => '',
         ),
         'mensagem' => array(
-            'cor' => 'text-info',
-            'texto' => '',
+            'cor' => 'text-danger',
+            'texto' => 'Deve ser exatamente igual a senha informada acima!',
         )
     );
 
@@ -254,11 +254,12 @@
             'estilo' => '',
             'descricao' => lang('Artefato.perfil.textos.descricaoFoto'),
             'titulo' => $dadosUsuarios->NOME,
-            'cripto' => FALSE,
+            'cripto' => TRUE,
         ),
         'arquivo' => array(
             'label' => 'Foto',
             'campo' => 'userfile',
+            'codigo' => $dadosUsuarios->ID,
             'componente' => 'file',
             'texto' => 'Selecionar uma foto...',
             'accept' => '.jpg',
@@ -266,6 +267,9 @@
         'instrucoes' => '<b class="text-danger">ATENÇÃO!!</b> A imagem escolhida para a foto deve ser <b>JPG</b> no tamanho de <b>300px x 300px</b> com resolução de até <b>96 dpi</b>. Imagens muito grandes serão diminuidas/cortadas para estas configurações/proporções, mas dependendo do caso, podem gerar erros no sistema.',
     );
 
+
+    // obtendo mensagens
+    $saida = session()->getFlashData('saida');
 ?>
 
 <div class="row">
@@ -311,19 +315,19 @@
                 
                 <div class="card-header p-2">
                     <ul class="nav nav-pills">
-                        <li class="nav-item"><a class="nav-link active" href="#activity" data-toggle="tab"><?= lang('Usuarios.geral.abas.perfil') ?></a></li>
-                        <li class="nav-item"><a class="nav-link" href="#settings" data-toggle="tab"><?= lang('Usuarios.geral.abas.senha') ?></a></li>
-                        <li class="nav-item"><a class="nav-link" href="#foto" data-toggle="tab" id="tab_7_tab" role="tab" aria-controls="tab_7" aria-selected="false"><?= lang('Usuarios.geral.abas.foto') ?></a></li>
+                        <li class="nav-item"><a class="nav-link <?= (($aba == 'perfil') ? 'active' : '') ?>" href="#activity" data-toggle="tab"><?= lang('Perfil.abas.perfil') ?></a></li>
+                        <li class="nav-item"><a class="nav-link <?= (($aba == 'senha') ? 'active' : '') ?>" href="#settings" data-toggle="tab"><?= lang('Perfil.abas.senha') ?></a></li>
+                        <li class="nav-item"><a class="nav-link <?= (($aba == 'foto') ? 'active' : '') ?>" href="#foto" data-toggle="tab" id="tab_7_tab" role="tab" aria-controls="tab_7" aria-selected="false"><?= lang('Perfil.abas.foto') ?></a></li>
                     </ul>
                 </div><!-- /.card-header -->
 
                 <div class="card-body">
                     <div class="tab-content">
                         
-                        <div class="active tab-pane" id="activity">
+                        <div class="<?= (($aba == 'perfil') ? 'active' : '') ?> tab-pane" id="activity">
                             
                             <form class="form-horizontal" action="<?= base_url('perfil/salvar') ?>" method="POST" enctype="multipart/form-data">
-                                <h5 class="mt-2 text-primary">Dados do Usuário</h5><hr>
+                                <h5 class="mt-2 text-primary"><?= lang('Perfil.mensagens.dados') ?></h5><hr>
                                 <div class="row">
                                     <?= componente($campoNOME) ?>
                                     <?= componente($campoEMAIL) ?>
@@ -331,7 +335,7 @@
                                     <?= componente($campoCARGO) ?>
                                 </div>
 
-                                <h5 class="mt-2 text-primary">Configurações do Ambiente</h5><hr>
+                                <h5 class="mt-2 text-primary"><?= lang('Perfil.mensagens.ambiente') ?></h5><hr>
                                 <div class="row">
                                     <?= componente($campoIDIOMA) ?>
                                     <?= componente($campoMODO) ?>
@@ -343,7 +347,7 @@
                             </form>
                         </div>
                        
-                        <div class="tab-pane" id="settings">
+                        <div class="<?= (($aba == 'senha') ? 'active' : '') ?> tab-pane" id="settings">
                             <form class="form-horizontal" action="<?= base_url('perfil/alterarsenha') ?>" method="POST">
                                 <?= componente($campoSENHAantiga) ?>
                                 <?= componente($campoSENHAnova) ?>
@@ -355,7 +359,7 @@
                         </div> <!-- /.tab-pane -->
 
 
-                        <div class="tab-pane fade" id="foto" role="tabpanel" aria-labelledby="tab_7_tab">
+                        <div class="<?= (($aba == 'foto') ? 'active' : '') ?> tab-pane fade" id="foto" role="tabpanel" aria-labelledby="tab_7_tab">
                             <div class="row">
 
                                 <div class="form-group col-lg-12">
@@ -377,26 +381,14 @@
             </div> <!-- /.card -->
         </div>
 
-
-        // tudo certo
-                $saida['estado'] = 'ok';
-                $saida['titulo'] = lang('Artefato.crud.mensagens.geral.ok');
-                if($usuariosModel->affectedRows() > 0) {
-                    $saida['msg'] = lang('Artefato.crud.mensagens.salvar.sucesso');
-                } else {
-                    $saida['msg'] = lang('Artefato.crud.mensagens.salvar.nada');
-                }
-                $saida['icone'] = 'success';
-                $saida['rows'] = $usuariosModel->affectedRows();
-
         <?php if($estado != 'entrou') : ?>
         <div class="col-md-12">
             <div class="msg" style="display:none;">
                 <script>
                     $(function () {
-                        tit = "<?= session()->getFlashData('tit') ?>";
-                        msg = "<?= session()->getFlashData('msg') ?>";
-                        sts = "<?= session()->getFlashData('sts') ?>";
+                        tit = "<?= $saida['titulo'] ?>";
+                        msg = "<?= $saida['msg'] ?>";
+                        sts = "<?= $saida['icone'] ?>";
 
                         if (sts != '') {
 
@@ -409,7 +401,6 @@
                             } else {
                                 Swal.fire({
                                     position: 'center',
-                                    type: sts,
                                     icon: sts,
                                     title: tit,
                                     text: msg,

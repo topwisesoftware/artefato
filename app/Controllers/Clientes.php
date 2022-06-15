@@ -27,7 +27,7 @@ class Clientes extends BaseController
         $data['modal_config'] = array (
             'titulo' => lang('Artefato.crud.botoes.incluir') . ' ' . lang('Clientes.geral.singular'),
             'id' => 'inserir-clientes',
-            'size' => 'lg',
+            'size' => 'xl',
             'acao' => 'inserir',
         );
         $data['modal_inserir_clientes'] = view('admin/clientes/modal_clientes', $data);
@@ -82,7 +82,7 @@ class Clientes extends BaseController
         $data['modal_config'] = array (
             'titulo' => lang(($tp == '1') ? 'Artefato.crud.botoes.editar' : 'Artefato.crud.botoes.consultar') . ' ' . lang('Clientes.geral.singular'),
             'id' => 'editar-clientes',
-            'size' => 'lg',
+            'size' => 'xl',
             'acao' => ($tp == '1') ? 'editar' : 'consultar',
         );
         echo view('admin/clientes/modal_clientes', $data);

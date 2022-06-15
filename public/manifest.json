@@ -1,0 +1,21 @@
+{
+  "short_name": "Artefato",
+  "name": "TopWise Artefato",
+  "icons": [
+    {
+      "src": "/assets/favicon/assist_icon.png",
+      "type": "image/png",
+      "sizes": "192x192"
+    },
+    {
+      "src": "/assets/favicon/assist_logo-512.png",
+      "type": "image/png",
+      "sizes": "512x512"
+    }
+  ],
+  "start_url": "/",
+  "background_color": "#ffffff",
+  "display": "standalone",
+  "scope": "/maps/",
+  "theme_color": "#ffffff"
+}

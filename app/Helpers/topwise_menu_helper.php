@@ -120,7 +120,7 @@ function TOPWISE_menu_usuario($usuarioLogado)
                             'estilo' => '',
                             'descricao' => lang('Artefato.perfil.textos.descricaoFoto'),
                             'titulo' => $usuarioLogado->NOME,
-                            'cripto' => FALSE,
+                            'cripto' => TRUE,
                         )) ?>                    
                     <span class="d-none d-md-inline"><?= $usuarioLogado->LOGIN ?></span>
                 </a>
@@ -138,7 +138,7 @@ function TOPWISE_menu_usuario($usuarioLogado)
                                 'estilo' => '',
                                 'descricao' => lang('Artefato.perfil.textos.descricaoFoto'),
                                 'titulo' => $usuarioLogado->NOME,
-                                'cripto' => FALSE,
+                                'cripto' => TRUE,
                             )) ?>
                         <p>
                             <?= $usuarioLogado->NOME ?>

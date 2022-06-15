@@ -47,8 +47,8 @@
             		{ name: 'phone',   width: 480 }
         		]
         	},
-			<?php if($pagina == 'agendamento') { ?>"order": [[ 0, "desc" ]], <?php } ?>
-			<?php if($pagina == 'agendamento') { ?>"pageLength": 6, <?php } else { ?>"pageLength": 10,<?php } ?>
+			<?= (($pagina == 'agendamento') ? '"order": [[ 0, "desc" ]] ' : '"order": [[ 0, "asc" ]] ') ?>,
+			<?= (($pagina == 'agendamento') ? '"pageLength": 6' : '"pageLength": 10') ?>,
 	        "lengthChange": false,
 			"scrollX": false,
 	        "scrollCollapse": false,

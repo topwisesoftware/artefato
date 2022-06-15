@@ -22,9 +22,6 @@ return [
             'negado' => 'Acesso negado.',
         ]
     ],
-    'configuracoes' => [
-
-    ],
     'sobre' => [
         'titulo' => 'Sobre',
         'descricao' => 'Sistema Base para Desenvolvimento em CI4 e AdminLTE3',

@@ -23,7 +23,8 @@ class UsuariosModel extends Model
         'TELEFONE',
         'CARGO',
         'FOTO',
-        'IDIOMA'
+        'IDIOMA',
+        'MODO'
     ];
 
     // Dates

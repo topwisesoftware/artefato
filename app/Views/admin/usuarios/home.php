@@ -2,6 +2,11 @@
 
 <?= $this->section('content') ?>
 
+<?php 
+//echo '<br>FCPATH = ' . FCPATH . 'assets/img/usuarios/';
+//echo '<br>WRITEPATH = ' . WRITEPATH;
+?>
+
 <!-- Content Here -->
 <div class="msg" style="display:none;"><?= session()->getFlashData('mensagem') ?></div>
 

@@ -52,8 +52,8 @@ $routes->post('/configuracoes/salvar', 'Configuracoes::salvar');
 // Perfil
 $routes->get('/perfil', 'Perfil::index');
 $routes->post('/perfil/salvar', 'Perfil::salvar');
-//$routes->post('/perfil/alterarsenha', 'Perfil::alterarsenha');
-//$routes->post('/perfil/alterarfoto', 'Perfil::alterarfoto');
+$routes->post('/perfil/alterarsenha', 'Perfil::alterarsenha');
+//$routes->post('/perfil/processarfoto/(:alpha)', 'Perfil::processarfoto');
 
 // Clientes
 $routes->get('/clientes', 'Clientes::index');
@@ -70,6 +70,7 @@ $routes->get('/usuarios/relatorio/(:alpha)', 'Usuarios::relatorio');
 $routes->post('/usuarios/editar', 'Usuarios::editar');
 $routes->post('/usuarios/salvar', 'Usuarios::salvar');
 $routes->post('/usuarios/excluir', 'Usuarios::excluir');
+$routes->post('/usuarios/salvarfoto/(:num)', 'Usuarios::processarfoto/$1');
 
 /*
  * --------------------------------------------------------------------

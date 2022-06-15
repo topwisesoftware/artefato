@@ -170,7 +170,7 @@ function Componente_img(array $info)
     $urlSemFoto = base_url($pastaAssets . $semFoto);
     $dirSemFoto = './' . $pastaAssets . $semFoto;
     $hashTempo = topwise_MD5(date('Y-m-d H:i'));
-    $urlBaseImagem = base_url($pastaAssets . $info['pasta'] . '/');
+    $urlBaseImagem = base_url($pastaAssets . $info['pasta']);
     $dirBaseImagem = './' . $pastaAssets . $info['pasta'] . '/';
 
     // verificar criptografia
@@ -189,9 +189,10 @@ function Componente_img(array $info)
         $arqImagemJPG = $info['imagem'] . '.jpg';
         $arqImagemPNG = $info['imagem'] . '.png';
     }
-    $urlImagemJPG = $urlBaseImagem . $arqImagemJPG;
-    $urlImagemPNG = $urlBaseImagem . $arqImagemPNG;
+    $urlImagemJPG = $urlBaseImagem . '/' . $arqImagemJPG;
     $arqImagemJPG = $dirBaseImagem . $arqImagemJPG;
+
+    $urlImagemPNG = $urlBaseImagem . '/' . $arqImagemPNG;
     $arqImagemPNG = $dirBaseImagem . $arqImagemPNG;
 
     // verificando a existencia da imagem
@@ -238,10 +239,11 @@ function Componente_img(array $info)
 
     // verificando titulo
     if(isset($info['titulo']) && $info['titulo'] != "") {
-        $tagAlt = 'title="' . $info['titulo'] . '"';
+        $tagAlt = 'title="' . $info['titulo'] . ' - ' . $urlImagemJPG . '"';
     } else {
         $tagAlt = '';
     }
+
 
     $render  = "<img {$tagID} {$tagClass} {$tagStyle} src='{$urlFoto}?{$hashTempo}' {$tagAlt} >";
 
@@ -337,7 +339,7 @@ function Componente_button(array $info)
 
 function Componente_file(array $info)
 {
-    $input = "<input type='file' class='custom-file-input' id='{$info['campo']}' name='{$info['campo']}' accept='{$info['accept']}' placeholder='{$info['label']}'>";
+    $input = "<input type='file' class='custom-file-input' id='{$info['campo']}' name='{$info['campo']}' accept='{$info['accept']}' placeholder='{$info['label']}' data-id='{$info['codigo']}'>";
     $mensagem = "<label class='custom-file-label' for='{$info['campo']}'>{$info['texto']}</label>";
     
     $render = Componente_div('form-group', 
@@ -352,8 +354,8 @@ function Componente_file(array $info)
 function Componente_foto(array $info)
 {
     $label = Componente_label($info['campo'], false, $info['label']);
-    $foto = Componente_div('col-lg-4', Componente($info['imagem']), 'localfoto');
-    $arquivo = Componente_div('col-lg-8', Componente($info['arquivo']) . $info['instrucoes']);
+    $foto = Componente_div('col-lg-3', Componente($info['imagem']), 'localfoto');
+    $arquivo = Componente_div('col-lg-9', Componente($info['arquivo']) . $info['instrucoes']);
     $render = Componente_div('form-group col-lg-12', $label . Componente_div('row', $foto . $arquivo));
 
     return $render;

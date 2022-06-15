@@ -205,4 +205,5 @@
     $('#editar-<?= Strtolower($entidade) ?>').on('hidden.bs.modal', function () {
         $('.form-msg').html('');
     })
+
 </script>
