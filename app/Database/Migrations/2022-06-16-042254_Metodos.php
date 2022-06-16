@@ -4,7 +4,7 @@ namespace App\Database\Migrations;
 
 use CodeIgniter\Database\Migration;
 
-class Regras extends Migration
+class Metodos extends Migration
 {
     public function up()
     {
@@ -17,35 +17,20 @@ class Regras extends Migration
                 'auto_increment' => true,
                 'null' => false,
             ],
-            'REGRA' => [
-                'type'       => 'VARCHAR',
-                'constraint' => '15',
-                'null' => false,
-            ],
             'NOME' => [
                 'type'       => 'VARCHAR',
-                'constraint' => '35',
+                'constraint' => '255',
                 'null' => false,
             ],
-            'DESCRICAO' => [
+            'METODO' => [
                 'type'       => 'VARCHAR',
-                'constraint' => '50',
+                'constraint' => '255',
                 'null' => false,
             ],
-            'COR' => [
-                'type'       => 'VARCHAR',
-                'constraint' => '50',
+            'PAGINAS_ID' => [
+                'type'       => 'INT',
+                'constraint' => '11',
                 'null' => false,
-            ],
-            'PERMISSAO' => [
-                'type'       => 'VARCHAR',
-                'constraint' => '15',
-                'null' => false,
-            ],
-            'PADRAO' => [
-                'type'       => 'ENUM',
-                'constraint' => ['S', 'N'],
-                'default' => 'N'
             ],
             'CHAVE' => [
                 'type'       => 'VARCHAR',
@@ -83,17 +68,16 @@ class Regras extends Migration
         
         // chaves
         $this->forge->addPrimaryKey('ID');
-        $this->forge->addUniqueKey('REGRA');
         $this->forge->addUniqueKey('CHAVE');
         
         // criar tabela
         $atributos = ['ENGINE' => 'InnoDB'];
-        $this->forge->createTable('regras', false, $atributos);
+        $this->forge->createTable('metodos', false, $atributos);
     }
 
     public function down()
     {
         // excluir tabela
-        $this->forge->dropTable('regras', true);
+        $this->forge->dropTable('metodos', true);
     }
 }

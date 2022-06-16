@@ -33,6 +33,20 @@ class Configuracoes extends Migration
                 'default' => 'CLARO',
                 'null' => false,
             ],              
+            'CHAVE' => [
+                'type'       => 'VARCHAR',
+                'constraint' => '255',
+                'null' => false,
+            ],
+            'USUALTERACAO' => [
+                'type'       => 'VARCHAR',
+                'constraint' => '40',
+                'default' => NULL
+            ],
+            'DATAALTERACAO' => [
+                'type'       => 'DATETIME',
+                'default' => NULL
+            ],
         ]);
         
         // chaves

@@ -37,6 +37,11 @@ class Clientes extends Migration
                 'constraint' => '1',
                 'null' => true,
             ],
+            'CHAVE' => [
+                'type'       => 'VARCHAR',
+                'constraint' => '255',
+                'null' => false,
+            ],
             'USUCADASTRO' => [
                 'type'       => 'VARCHAR',
                 'constraint' => '40',
@@ -68,6 +73,7 @@ class Clientes extends Migration
         
         // chaves
         $this->forge->addPrimaryKey('ID');
+        $this->forge->addUniqueKey('CHAVE');
         
         // criar tabela
         $atributos = ['ENGINE' => 'InnoDB'];

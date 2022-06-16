@@ -4,17 +4,14 @@ namespace App\Controllers;
 
 use App\Controllers\BaseController;
 
-use App\Models\ClientesModel;
-use App\Models\ConfiguracoesModel;
-
 class Clientes extends BaseController
 {
     public $breadcrumb;
 
     public function index()
     {
-        $clientesModel = new ClientesModel();
-        $configuracoesModel = new ConfiguracoesModel();
+        $clientesModel = new \App\Models\Clientes();
+        $configuracoesModel = new \App\Models\Configuracoes();
 
         $data['usuarioLogado'] = TOPWISE_seguranca_UsuarioLogado();
         $data['dadosClientes'] = $clientesModel->findAll();
@@ -41,7 +38,7 @@ class Clientes extends BaseController
     }
 
     public function exibir() {
-        $clientesModel = new ClientesModel();
+        $clientesModel = new \App\Models\Clientes();
 
         $data['usuarioLogado'] = TOPWISE_seguranca_UsuarioLogado();
         $data['dadosClientes'] = $clientesModel->findAll();
@@ -51,7 +48,7 @@ class Clientes extends BaseController
     }
 
     public function relatorio($tipo = 'listagem') {
-        $clientesModel = new ClientesModel();
+        $clientesModel = new \App\Models\Clientes();
 
         $data['usuarioLogado'] = TOPWISE_seguranca_UsuarioLogado();
 
@@ -65,8 +62,8 @@ class Clientes extends BaseController
     }
 
     public function editar() {
-        $clientesModel = new ClientesModel();
-        $configuracoesModel = new ConfiguracoesModel();
+        $clientesModel = new \App\Models\Clientes();
+        $configuracoesModel = new \App\Models\Configuracoes();
 
         // preparando dados
         $id = trim($_POST['id']);
@@ -90,7 +87,7 @@ class Clientes extends BaseController
     }
 
     public function salvar() {
-        $clientesModel = new ClientesModel();
+        $clientesModel = new \App\Models\Clientes();
 
         // preparação dos dados para o update
         $campos = $this->request->getPost();
@@ -208,7 +205,7 @@ class Clientes extends BaseController
     }
 
     public function excluir() {
-        $clientesModel = new ClientesModel();
+        $clientesModel = new \App\Models\Clientes();
 
         // preparação dos dados para o update
         $id = trim($_POST['id']);

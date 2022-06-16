@@ -4,18 +4,13 @@ namespace App\Controllers;
 
 use App\Controllers\BaseController;
 
-use App\Models\UsuariosModel;
-use App\Models\UsuariosView;
-use App\Models\RegrasModel;
-use App\Models\ConfiguracoesModel;
-
 class Usuarios extends BaseController
 {
     public function index()
     {
-        $usuariosModel = new UsuariosModel();
-        $regrasModel = new RegrasModel();
-        $configuracoesModel = new ConfiguracoesModel();
+        $usuariosModel = new \App\Models\Usuarios();
+        $regrasModel = new \App\Models\Regras();
+        $configuracoesModel = new \App\Models\Configuracoes();
 
         $data['usuarioLogado'] = TOPWISE_seguranca_UsuarioLogado();
         $data['dadosUsuarios'] = $usuariosModel->findAll();
@@ -43,7 +38,7 @@ class Usuarios extends BaseController
     }
 
     public function exibir() {
-        $usuariosView = new UsuariosView();
+        $usuariosView = new \App\Models\UsuariosView();
 
         $data['usuarioLogado'] = TOPWISE_seguranca_UsuarioLogado();
         $data['dadosUsuarios'] = $usuariosView->findAll();
@@ -53,7 +48,8 @@ class Usuarios extends BaseController
     }
 
     public function relatorio($tipo = 'listagem') {
-        $usuariosModel = new UsuariosModel();
+
+        $usuariosModel = new \App\Models\Usuarios();
 
         $data['usuarioLogado'] = TOPWISE_seguranca_UsuarioLogado();
 
@@ -67,9 +63,10 @@ class Usuarios extends BaseController
     }
 
     public function editar() {
-        $usuariosModel = new UsuariosModel();
-        $regrasModel = new RegrasModel();
-        $configuracoesModel = new ConfiguracoesModel();
+
+        $usuariosModel = new \App\Models\Usuarios();
+        $regrasModel = new \App\Models\Regras();
+        $configuracoesModel = new \App\Models\Configuracoes();
 
         // preparando dados
         $id = trim($_POST['id']);
@@ -96,7 +93,8 @@ class Usuarios extends BaseController
     }
 
     public function salvar() {
-        $usuariosModel = new UsuariosModel();
+
+        $usuariosModel = new \App\Models\Usuarios();
 
         // preparação dos dados para o update
         $campos = $this->request->getPost();
@@ -259,7 +257,7 @@ class Usuarios extends BaseController
     }
 
     public function excluir() {
-        $usuariosModel = new UsuariosModel();
+        $usuariosModel = new \App\Models\Usuarios();
 
         // preparação dos dados para o update
         $id = trim($_POST['id']);
@@ -269,7 +267,8 @@ class Usuarios extends BaseController
     }    
 
     function processarfoto($id){
-        $usuariosModel = new UsuariosModel();
+
+        $usuariosModel = new \App\Models\Usuarios();
 
         // configuração do download
         $uploadPath = 'assets/img/usuarios/';

@@ -4,13 +4,12 @@ namespace App\Controllers;
 
 use App\Controllers\BaseController;
 
-use App\Models\ConfiguracoesModel;
-
 class Configuracoes extends BaseController
 {
     public function index()
     {
-        $configuracoesModel = new ConfiguracoesModel();
+        $configuracoesModel = new \App\Models\Configuracoes();
+        
         $data['usuarioLogado'] = TOPWISE_seguranca_UsuarioLogado();
         $data['dadosConfiguracoes'] = $configuracoesModel->first();
         $data['titulo'] = 'Gerenciar Configurações';
@@ -39,7 +38,7 @@ class Configuracoes extends BaseController
 
     public function salvar()
     {
-        $configuracoesModel = new ConfiguracoesModel();
+        $configuracoesModel = new \App\Models\Configuracoes();
 
         // preparação dos dados para o update
         $campos = $this->request->getPost();

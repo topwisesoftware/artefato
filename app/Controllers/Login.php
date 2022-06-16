@@ -3,14 +3,12 @@
 namespace App\Controllers;
 
 use App\Controllers\BaseController;
-use App\Models\UsuariosModel;
-use App\Models\ConfiguracoesModel;
 
 class Login extends BaseController
 {
     public function index()
     {
-        $configuracoesModel = new ConfiguracoesModel();
+        $configuracoesModel = new \App\Models\Configuracoes();
         $data['modo'] = $configuracoesModel->modo();
 
         return view('admin/login', $data);
@@ -28,7 +26,7 @@ class Login extends BaseController
 
         if(!((is_null($usuario) || is_null($senha)))) {
 
-            $usuariosModel = new UsuariosModel();
+            $usuariosModel = new \App\Models\Usuarios();
             $dadosUsuario = $usuariosModel->localizarUsuario($usuario);
 
             if(count($dadosUsuario) > 0) {

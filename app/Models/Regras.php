@@ -4,7 +4,7 @@ namespace App\Models;
 
 use CodeIgniter\Model;
 
-class RegrasModel extends Model
+class Regras extends Model
 {
     protected $DBGroup          = 'default';
     protected $table            = 'regras';

@@ -4,21 +4,17 @@ namespace App\Models;
 
 use CodeIgniter\Model;
 
-class ConfiguracoesModel extends Model
+class Paginas extends Model
 {
     protected $DBGroup          = 'default';
-    protected $table            = 'configuracoes';
-    protected $primaryKey       = 'ID';
+    protected $table            = 'paginas';
+    protected $primaryKey       = 'id';
     protected $useAutoIncrement = true;
     protected $insertID         = 0;
-    protected $returnType       = 'object';
+    protected $returnType       = 'array';
     protected $useSoftDeletes   = false;
     protected $protectFields    = true;
-    protected $allowedFields    = [
-        'TIPO_JANELA_IMPRESSAO',
-        'IDIOMA',
-        'MODO',
-    ];
+    protected $allowedFields    = [];
 
     // Dates
     protected $useTimestamps = false;
@@ -43,28 +39,4 @@ class ConfiguracoesModel extends Model
     protected $afterFind      = [];
     protected $beforeDelete   = [];
     protected $afterDelete    = [];
-
-    public function localizarTudo()
-    {
-        $rqLogin = $this->where('ID', 1)->first();
-        return $rqLogin;            
-    }
-
-    public function tipo_janela_impressao()
-    {
-        $rqLogin = $this->where('ID', 1)->first();
-        return $rqLogin->TIPO_JANELA_IMPRESSAO;            
-    }
-
-    public function idioma_padrao()
-    {
-        $rqLogin = $this->where('ID', 1)->first();
-        return $rqLogin->IDIOMA;            
-    }
-
-    public function modo()
-    {
-        $rqLogin = $this->where('ID', 1)->first();
-        return $rqLogin->MODO;            
-    }    
 }

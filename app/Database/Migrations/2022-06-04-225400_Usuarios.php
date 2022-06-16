@@ -71,6 +71,11 @@ class Usuarios extends Migration
                 'default' => 'CLARO',
                 'null' => false,
             ],            
+            'CHAVE' => [
+                'type'       => 'VARCHAR',
+                'constraint' => '255',
+                'null' => false,
+            ],
             'USUCADASTRO' => [
                 'type'       => 'VARCHAR',
                 'constraint' => '40',
@@ -103,6 +108,7 @@ class Usuarios extends Migration
         // chaves
         $this->forge->addPrimaryKey('ID');
         $this->forge->addUniqueKey('LOGIN');
+        $this->forge->addUniqueKey('CHAVE');
         
         // criar tabela
         $atributos = ['ENGINE' => 'InnoDB'];
@@ -124,6 +130,7 @@ class Usuarios extends Migration
                 $criarView .= '`usu`.`IDIOMA` AS `IDIOMA`, ';
                 $criarView .= '`usu`.`MODO` AS `MODO`, ';
                 $criarView .= '`usu`.`FOTO` AS `FOTO`, ';
+                $criarView .= '`usu`.`CHAVE` AS `CHAVE`, ';
                 $criarView .= '`usu`.`USUCADASTRO` AS `USUCADASTRO`, ';
                 $criarView .= '`usu`.`USUALTERACAO` AS `USUALTERACAO`, ';
                 $criarView .= '`usu`.`USUEXCLUSAO` AS `USUEXCLUSAO`, ';
