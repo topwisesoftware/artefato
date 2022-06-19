@@ -5,6 +5,15 @@
     "description": "TopWise Software CI4 Starter APP",
     "homepage": "https://topwise.com.br",
     "license": "MIT",
+    "minimum-stability": "dev",
+    "authors": [
+        {
+            "name": "Joe Edman",
+            "email": "joe.edman@gmail.com",
+            "homepage": "https://topwise.com.br/",
+            "role": "Developer"
+        }
+    ],
     "require": {
         "php": "^7.4 || ^8.0",
         "codeigniter4/framework": "^4.0",
