@@ -5,7 +5,7 @@
 	}
 
 	function TopWise_App_Versao() {
-		return '22.6 r3 build 12';
+		return '22.6 r3 build 13';
 	}
 
 	function TopWise_App_Data_Release() {

@@ -1,8 +1,9 @@
 {
-    "name": "codeigniter4/appstarter",
+    "name": "topwisesoftware/artefato",
+    "version": "22.13",
     "type": "project",
-    "description": "CodeIgniter4 starter app",
-    "homepage": "https://codeigniter.com",
+    "description": "TopWise Software CI4 Starter APP",
+    "homepage": "https://topwise.com.br",
     "license": "MIT",
     "require": {
         "php": "^7.4 || ^8.0",
