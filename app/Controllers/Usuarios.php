@@ -6,19 +6,38 @@ use App\Controllers\BaseController;
 
 class Usuarios extends BaseController
 {
+    protected function infoGeral()
+    {
+        $configuracoesModel = new \App\Models\Configuracoes();
+
+        // configurações gerais
+        $data['usuarioLogado'] = TOPWISE_seguranca_UsuarioLogado();
+        $data['tipo_janela_impressao'] = $configuracoesModel->tipo_janela_impressao();
+    
+        // configurações gerais da página
+        $data['titulo'] = 'Gerenciar Usuários';
+        $data['pagina'] = 'usuarios';
+        //$data['cabecalho'] = FALSE;
+        
+        // breadcrumb
+        $this->breadcrumb->add(lang('Artefato.titulo'), '/');
+        $this->breadcrumb->add(lang('Usuarios.titulo'), '/usuarios');
+        $data['breadcrumb'] = $this->breadcrumb->render();
+
+        return $data;
+    }
+
     public function index()
     {
         $usuariosModel = new \App\Models\Usuarios();
         $regrasModel = new \App\Models\Regras();
-        $configuracoesModel = new \App\Models\Configuracoes();
 
-        $data['usuarioLogado'] = TOPWISE_seguranca_UsuarioLogado();
+        // configurações da página
+        $data = $this->infoGeral();
+
+        //dados
         $data['dadosUsuarios'] = $usuariosModel->findAll();
         $data['dadosRegras'] = $regrasModel->findAll();
-        $data['titulo'] = 'Gerenciar Usuários';
-        $data['pagina'] = 'usuarios';
-        $data['tipo_janela_impressao'] = $configuracoesModel->tipo_janela_impressao();
-        //$data['cabecalho'] = FALSE;
 
         // modal de insert
         $data['modal_config'] = array (
@@ -28,16 +47,12 @@ class Usuarios extends BaseController
             'acao' => 'inserir',
         );
         $data['modal_inserir_usuarios'] = view('admin/usuarios/modal_usuarios', $data);
-
-        // breadcrumb
-        $this->breadcrumb->add('Início', '/');
-        $this->breadcrumb->add('Usuarios', '/usuarios');
-        $data['breadcrumb'] = $this->breadcrumb->render();
         
         return view('admin/usuarios/home.php', $data);
     }
 
-    public function exibir() {
+    public function exibir()
+    {
         $usuariosView = new \App\Models\UsuariosView();
 
         $data['usuarioLogado'] = TOPWISE_seguranca_UsuarioLogado();
@@ -47,7 +62,7 @@ class Usuarios extends BaseController
         return view('admin/usuarios/home_listar.php', $data);
     }
 
-    public function relatorio($tipo = 'listagem') {
+    public function relatorio($tipo = 'listagem')    {
 
         $usuariosModel = new \App\Models\Usuarios();
 
@@ -62,24 +77,21 @@ class Usuarios extends BaseController
         return view('admin/usuarios/listagem', $data);
     }
 
-    public function editar() {
-
+    public function editar()
+    {
         $usuariosModel = new \App\Models\Usuarios();
         $regrasModel = new \App\Models\Regras();
-        $configuracoesModel = new \App\Models\Configuracoes();
+
+        // configurações da página
+        $data = $this->infoGeral();
 
         // preparando dados
         $id = trim($_POST['id']);
         $tp = trim($_POST['tp']);
 
-        $data['usuarioLogado'] = TOPWISE_seguranca_UsuarioLogado();
+        //dados
         $data['dadosUsuarios'] = $usuariosModel->find($id);
         $data['dadosRegras'] = $regrasModel->findAll();
-        $data['titulo'] = 'Gerenciar Usuários';
-        $data['pagina'] = 'usuarios';
-        $data['tipo_janela_impressao'] = $configuracoesModel->tipo_janela_impressao();
-        
-        //$data['erros'] = $this->form_validation->error_array();
 
         // modal de atualização/consulta
         $data['modal_config'] = array (
@@ -88,12 +100,12 @@ class Usuarios extends BaseController
             'size' => 'xl',
             'acao' => ($tp == '1') ? 'editar' : 'consultar',
         );
-        echo view('admin/usuarios/modal_usuarios', $data);
-       
+
+        echo view('admin/usuarios/modal_usuarios', $data);       
     }
 
-    public function salvar() {
-
+    public function salvar()
+    {
         $usuariosModel = new \App\Models\Usuarios();
 
         // preparação dos dados para o update
@@ -256,7 +268,8 @@ class Usuarios extends BaseController
         echo json_encode($saida);
     }
 
-    public function excluir() {
+    public function excluir()
+    {
         $usuariosModel = new \App\Models\Usuarios();
 
         // preparação dos dados para o update
@@ -266,8 +279,8 @@ class Usuarios extends BaseController
         echo $result;
     }    
 
-    function processarfoto($id){
-
+    function processarfoto($id)
+    {
         $usuariosModel = new \App\Models\Usuarios();
 
         // configuração do download

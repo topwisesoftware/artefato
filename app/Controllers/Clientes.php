@@ -6,19 +6,36 @@ use App\Controllers\BaseController;
 
 class Clientes extends BaseController
 {
-    public $breadcrumb;
+    protected function infoGeral()
+    {
+        $configuracoesModel = new \App\Models\Configuracoes();
+
+        // configurações gerais
+        $data['usuarioLogado'] = TOPWISE_seguranca_UsuarioLogado();
+        $data['tipo_janela_impressao'] = $configuracoesModel->tipo_janela_impressao();
+
+        // configurações gerais da página
+        $data['titulo'] = 'Gerenciar Clientes';
+        $data['pagina'] = 'clientes';
+        //$data['cabecalho'] = FALSE;
+
+        // breadcrumb
+        $this->breadcrumb->add(lang('Artefato.titulo'), '/');
+        $this->breadcrumb->add(lang('Clientes.titulo'), '/clientes');
+        $data['breadcrumb'] = $this->breadcrumb->render();
+
+        return $data;
+    }
 
     public function index()
     {
         $clientesModel = new \App\Models\Clientes();
-        $configuracoesModel = new \App\Models\Configuracoes();
 
-        $data['usuarioLogado'] = TOPWISE_seguranca_UsuarioLogado();
+        // configurações da página
+        $data = $this->infoGeral();
+
+        // dados
         $data['dadosClientes'] = $clientesModel->findAll();
-        $data['titulo'] = 'Gerenciar Clientes';
-        $data['pagina'] = 'clientes';
-        $data['tipo_janela_impressao'] = $configuracoesModel->tipo_janela_impressao();
-        //$data['cabecalho'] = FALSE;
 
         // modal de insert
         $data['modal_config'] = array (
@@ -29,17 +46,14 @@ class Clientes extends BaseController
         );
         $data['modal_inserir_clientes'] = view('admin/clientes/modal_clientes', $data);
 
-        // breadcrumb
-        $this->breadcrumb->add('Início', '/');
-        $this->breadcrumb->add('Clientes', '/clientes');
-        $data['breadcrumb'] = $this->breadcrumb->render();
-
         return view('admin/clientes/home.php', $data);
     }
 
-    public function exibir() {
+    public function exibir()
+    {
         $clientesModel = new \App\Models\Clientes();
 
+        // dados
         $data['usuarioLogado'] = TOPWISE_seguranca_UsuarioLogado();
         $data['dadosClientes'] = $clientesModel->findAll();
         $data['erros'] = 0;
@@ -47,11 +61,12 @@ class Clientes extends BaseController
         return view('admin/clientes/home_listar.php', $data);
     }
 
-    public function relatorio($tipo = 'listagem') {
+    public function relatorio($tipo = 'listagem')
+    {
         $clientesModel = new \App\Models\Clientes();
 
+        // dados
         $data['usuarioLogado'] = TOPWISE_seguranca_UsuarioLogado();
-
         if($tipo == 'listagem') {
             $data['dadosClientes'] = $clientesModel->findAll();
             $data['titulo'] = lang('Artefato.crud.titulos.listagem') . ' ' .  lang('Clientes.geral.plural');
@@ -61,19 +76,19 @@ class Clientes extends BaseController
         return view('admin/clientes/listagem', $data);
     }
 
-    public function editar() {
+    public function editar()
+    {
         $clientesModel = new \App\Models\Clientes();
-        $configuracoesModel = new \App\Models\Configuracoes();
+
+        // configurações da página
+        $data = $this->infoGeral();
 
         // preparando dados
         $id = trim($_POST['id']);
         $tp = trim($_POST['tp']);
 
-        $data['usuarioLogado'] = TOPWISE_seguranca_UsuarioLogado();
+        // dados
         $data['dadosClientes'] = $clientesModel->find($id);
-        $data['titulo'] = 'Gerenciar Clientes';
-        $data['pagina'] = 'clientes';
-        $data['tipo_janela_impressao'] = $configuracoesModel->tipo_janela_impressao();
         
         // modal de atualização/consulta
         $data['modal_config'] = array (
@@ -82,11 +97,12 @@ class Clientes extends BaseController
             'size' => 'xl',
             'acao' => ($tp == '1') ? 'editar' : 'consultar',
         );
+
         echo view('admin/clientes/modal_clientes', $data);
-       
     }
 
-    public function salvar() {
+    public function salvar()
+    {
         $clientesModel = new \App\Models\Clientes();
 
         // preparação dos dados para o update
@@ -204,7 +220,8 @@ class Clientes extends BaseController
         echo json_encode($saida);
     }
 
-    public function excluir() {
+    public function excluir()
+    {
         $clientesModel = new \App\Models\Clientes();
 
         // preparação dos dados para o update
@@ -213,5 +230,4 @@ class Clientes extends BaseController
 
         echo $result;
     }
-
 }

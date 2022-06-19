@@ -16,7 +16,6 @@ class Login extends BaseController
 
     public function autenticar()
     {
-
         $usuario = $this->request->getPost('loginUsuario');
         $senha = $this->request->getPost('loginSenha');
         
@@ -73,5 +72,4 @@ class Login extends BaseController
         session()->destroy();
         return redirect()->to(base_url());
     }
-
 }

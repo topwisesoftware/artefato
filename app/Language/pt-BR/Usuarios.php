@@ -2,6 +2,7 @@
 
 // override core en language system validation or define your own en language validation message
 return [
+    'titulo' => 'Usuários',
     'geral' => [
         'singular' => 'Usuário',
         'plural' => 'Usuários',
@@ -49,7 +50,8 @@ return [
             ],
             'foto' => [
                 'nome' => 'Foto',
-                'descricao' => 'Foto do Usuário',
+                'descricao' => 'Selecionar uma foto para o usuário...',
+                'info' => '<b class="text-danger">ATENÇÃO!!</b> A imagem escolhida para a foto deve ser <b>JPG</b> no tamanho de <b>300px x 300px</b> com resolução de até <b>96 dpi</b>. Imagens muito grandes serão diminuidas/cortadas para estas configurações/proporções, mas dependendo do caso, podem gerar erros no sistema.',
             ],
             'senhaanterior' => [
                 'nome' => 'Senha Anterior',
@@ -64,7 +66,7 @@ return [
             'confirmarsenha' => [
                 'nome' => 'Confirmar nova senha',
                 'descricao' => 'Informe novamente a Nova Senha para confirmação',
-                'info' => 'A senha deve conter no mínimo: 6 caracteres, 1 letra maiúscula,<br>1 letra minúscula, 1 número, 1 símbolo - EXEMPLO: Senh4#0rt3',
+                'info' => 'Deve ser exatamente igual a senha informada acima!',
             ],
         ],
         'abas' => [

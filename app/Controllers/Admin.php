@@ -6,9 +6,12 @@ use App\Controllers\BaseController;
 
 class Admin extends BaseController
 {
-    public function index()
+    protected function infoGeral()
     {
+        // configurações gerais
         $data['usuarioLogado'] = TOPWISE_seguranca_UsuarioLogado();
+
+        // configurações gerais da página
         $data['titulo'] = 'Artefato ' . TopWise_App_Versao();
         $data['pagina'] = 'admin';
         $data['cabecalho'] = FALSE;
@@ -16,7 +19,14 @@ class Admin extends BaseController
         // breadcrumb
         $data['breadcrumb'] = '';
 
-        //return view('welcome_message');
+        return $data;
+    }
+
+    public function index()
+    {
+        // configurações da página
+        $data = $this->infoGeral();
+
         return view('admin/principal.php', $data);
     }
 }

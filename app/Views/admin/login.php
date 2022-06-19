@@ -1,6 +1,23 @@
-<?= $this->extend('_modelos/_login/principal') ?>
+<?php //$this->extend('_modelos/_login/principal') ?>
+<?= $this->extend('_modelos/_urbanui/_login/principal') ?>
 
-<?= $this->section('content') ?>
+<?= $this->section('content_urbanui') ?>
+
+    <form action="<?= base_url('login/autenticar') ?>" method="post">
+        <div class="form-group">
+            <label for="loginUsuario" class="sr-only"><?= lang('Artefato.login.form.usuario') ?></label>
+            <input type="text" name="loginUsuario" id="loginUsuario" class="form-control" placeholder="<?= lang('Artefato.login.form.usuario') ?>" autofocus required>
+        </div>
+        <div class="form-group mb-4">
+            <label for="password" class="sr-only"><?= lang('Artefato.login.form.senha') ?></label>
+            <input type="password" name="loginSenha" id="loginSenha" class="form-control" placeholder="<?= lang('Artefato.login.form.senha') ?>" required>
+        </div>
+        <button type="submit" class="btn btn-block login-btn mb-4"><?= lang('Artefato.login.form.botao') ?></button>
+    </form>
+
+<?= $this->endSection() ?>
+
+<?= $this->section('content_adminlte') ?>
 
     <p class="login-box-msg"><?= lang('Artefato.login.cabecalho') ?></p>
 

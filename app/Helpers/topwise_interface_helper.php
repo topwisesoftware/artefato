@@ -239,13 +239,13 @@ function Componente_img(array $info)
 
     // verificando titulo
     if(isset($info['titulo']) && $info['titulo'] != "") {
-        $tagAlt = 'title="' . $info['titulo'] . ' - ' . $urlImagemJPG . '"';
+        $tagTitle = 'title="' . $info['titulo'] . '"';
     } else {
-        $tagAlt = '';
+        $tagTitle = '';
     }
 
 
-    $render  = "<img {$tagID} {$tagClass} {$tagStyle} src='{$urlFoto}?{$hashTempo}' {$tagAlt} >";
+    $render  = "<img {$tagID} {$tagClass} {$tagStyle} src='{$urlFoto}?{$hashTempo}' {$tagAlt} {$tagTitle}>";
 
     return $render;    
 }

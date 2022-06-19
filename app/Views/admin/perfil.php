@@ -235,14 +235,14 @@
         ),
         'mensagem' => array(
             'cor' => 'text-danger',
-            'texto' => 'Deve ser exatamente igual a senha informada acima!',
+            'texto' => lang('Usuarios.geral.campos.confirmarsenha.info'),
         )
     );
 
     $campoFOTO = array(
         'componente' => 'foto',
         'label' => array(
-            'texto' => 'Foto',
+            'texto' => lang('Usuarios.geral.campos.foto.nome'),
         ),
         'campo' => 'userfile',
         'imagem' => array(
@@ -257,14 +257,14 @@
             'cripto' => TRUE,
         ),
         'arquivo' => array(
-            'label' => 'Foto',
+            'label' => lang('Usuarios.geral.campos.foto.nome'),
             'campo' => 'userfile',
             'codigo' => $dadosUsuarios->ID,
             'componente' => 'file',
-            'texto' => 'Selecionar uma foto...',
+            'texto' => lang('Usuarios.geral.campos.foto.descricao'),
             'accept' => '.jpg',
         ),
-        'instrucoes' => '<b class="text-danger">ATENÇÃO!!</b> A imagem escolhida para a foto deve ser <b>JPG</b> no tamanho de <b>300px x 300px</b> com resolução de até <b>96 dpi</b>. Imagens muito grandes serão diminuidas/cortadas para estas configurações/proporções, mas dependendo do caso, podem gerar erros no sistema.',
+        'instrucoes' => lang('Usuarios.geral.campos.foto.info'),
     );
 
     // configurações do form

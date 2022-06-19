@@ -6,21 +6,36 @@ use App\Controllers\BaseController;
 
 class Configuracoes extends BaseController
 {
+    protected function infoGeral()
+    {
+        $configuracoesModel = new \App\Models\Configuracoes();
+
+        // configurações gerais
+        $data['usuarioLogado'] = TOPWISE_seguranca_UsuarioLogado();
+        $data['tipo_janela_impressao'] = $configuracoesModel->tipo_janela_impressao();
+
+        // configurações gerais da página
+        $data['titulo'] = 'Gerenciar Configurações';
+        $data['pagina'] = 'configuracoes';
+        //$data['cabecalho'] = FALSE;
+
+        // breadcrumb
+        $this->breadcrumb->add(lang('Artefato.titulo'), '/');
+        $this->breadcrumb->add(lang('Configuracoes.titulo'), '/configuracoes');
+        $data['breadcrumb'] = $this->breadcrumb->render();
+
+        return $data;
+    }
+    
     public function index()
     {
         $configuracoesModel = new \App\Models\Configuracoes();
         
-        $data['usuarioLogado'] = TOPWISE_seguranca_UsuarioLogado();
-        $data['dadosConfiguracoes'] = $configuracoesModel->first();
-        $data['titulo'] = 'Gerenciar Configurações';
-        $data['pagina'] = 'configuracoes';
-        $data['tipo_janela_impressao'] = $configuracoesModel->tipo_janela_impressao();
-        //$data['cabecalho'] = FALSE;
+        // configurações da página
+        $data = $this->infoGeral();
 
-        // breadcrumb
-        $this->breadcrumb->add('Início', '/');
-        $this->breadcrumb->add('Configuracoes', '/configuracoes');
-        $data['breadcrumb'] = $this->breadcrumb->render();
+        // dados
+        $data['dadosConfiguracoes'] = $configuracoesModel->first();
 
         // mensagem
         $saida = session()->getFlashData('msg');
@@ -42,8 +57,6 @@ class Configuracoes extends BaseController
 
         // preparação dos dados para o update
         $campos = $this->request->getPost();
-
-
 
         // se existir a array
         if(isset($campos))
@@ -85,7 +98,6 @@ class Configuracoes extends BaseController
                 'ID' => lang('Artefato.crud.mensagens.salvar.erro_GERAL'),
             );
         }
-
 
         return redirect()->to(base_url('/configuracoes'))->with('msg', $saida);
     }

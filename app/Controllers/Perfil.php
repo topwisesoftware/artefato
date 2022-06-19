@@ -6,40 +6,52 @@ use App\Controllers\BaseController;
 
 class Perfil extends BaseController
 {
-    public function index()
+    protected function infoGeral()
     {
+        $configuracoesModel = new \App\Models\Configuracoes();
         $usuariosModel = new \App\Models\Usuarios();
         $regrasModel = new \App\Models\Regras();
-        $configuracoesModel = new \App\Models\Configuracoes();
 
+        // configurações gerais
         $data['usuarioLogado'] = TOPWISE_seguranca_UsuarioLogado();
-        $data['dadosUsuarios'] = $usuariosModel->find($data['usuarioLogado']->ID);
-        $data['dadosRegras'] = $regrasModel->findAll();
-        $data['titulo'] = 'Perfil do Usuário';
-        $data['pagina'] = 'perfil';
         $data['tipo_janela_impressao'] = $configuracoesModel->tipo_janela_impressao();
-        $data['estado'] = 'entrou';
-        $data['aba'] = 'perfil';
+        $data['dadosRegras'] = $regrasModel->findAll();
+        $data['dadosUsuarios'] = $usuariosModel->find($data['usuarioLogado']->ID);
+
+        // configurações gerais da página
+        $data['titulo'] = lang('Perfil.titulo');
+        $data['pagina'] = 'perfil';
         //$data['cabecalho'] = FALSE;
 
         // breadcrumb
-        $this->breadcrumb->add('Início', '/');
-        $this->breadcrumb->add('Usuarios', '/usuarios');
-        $this->breadcrumb->add('Perfil', '/perfil');
+        $this->breadcrumb->add(lang('Artefato.titulo'), '/');
+        $this->breadcrumb->add(lang('Perfil.titulo'), '/perfil');
         $data['breadcrumb'] = $this->breadcrumb->render();
+
+        return $data;
+    }
+
+    public function index()
+    {
+        // configurações da página
+        $data = $this->infoGeral();
+        $data['estado'] = 'entrou';
+        $data['aba'] = 'perfil';
         
         return view('admin/perfil.php', $data);
     }
 
-    public function salvar() {
-
+    public function salvar()
+    {
         $usuariosModel = new \App\Models\Usuarios();
-        $regrasModel = new \App\Models\Regras();
-        $configuracoesModel = new \App\Models\Configuracoes();
+
+        // configurações da página
+        $data = $this->infoGeral();
+        $data['estado'] = 'salvar';
+        $data['aba'] = 'perfil';
 
         // preparação dos dados para o update
         $campos = $this->request->getPost();
-        $data['usuarioLogado'] = TOPWISE_seguranca_UsuarioLogado();
 
         if(isset($campos)) {
             // definindo o usuário a ser alterado
@@ -72,36 +84,24 @@ class Perfil extends BaseController
             $saida['msg'] = lang('Artefato.crud.mensagens.salvar.semdados');
             $saida['icone'] = 'error';
             $saida['erros'] = array(
-                'ID' => lang('Artefato.crud.mensagens.salvar.erro_GERAL' . '<br> ID 002'),
+                'ID' => lang('Artefato.crud.mensagens.salvar.erro_GERAL') . '<br> ID 002',
             );
         }
-
-        $data['dadosUsuarios'] = $usuariosModel->find($data['usuarioLogado']->ID);
-        $data['dadosRegras'] = $regrasModel->findAll();
-        $data['titulo'] = 'Perfil do Usuário';
-        $data['pagina'] = 'perfil';
-        $data['tipo_janela_impressao'] = $configuracoesModel->tipo_janela_impressao();
-        $data['estado'] = 'salvar';
-        $data['aba'] = 'perfil';
-        //$data['cabecalho'] = FALSE;
 
         // enviar mensagem
         session()->setFlashData('saida', $saida);
 
-        // breadcrumb
-        $this->breadcrumb->add('Início', '/');
-        $this->breadcrumb->add('Usuarios', '/usuarios');
-        $this->breadcrumb->add('Perfil', '/perfil');
-        $data['breadcrumb'] = $this->breadcrumb->render();
-
         return view('admin/perfil.php', $data);
     }
 
-    public function alterarsenha() {
-
+    public function alterarsenha()
+    {
         $usuariosModel = new \App\Models\Usuarios();
-        $regrasModel = new \App\Models\Regras();
-        $configuracoesModel = new \App\Models\Configuracoes();
+
+        // configurações da página
+        $data = $this->infoGeral();
+        $data['estado'] = 'salvar';
+        $data['aba'] = 'senha';
 
         // preparação dos dados para o update
         $senhas = $this->request->getPost();
@@ -135,13 +135,13 @@ class Perfil extends BaseController
                                 // tudo certo
                                 $saida['estado'] = 'ok';
                                 $saida['titulo'] = lang('Artefato.crud.mensagens.geral.ok');
-                                $saida['msg'] = 'Senha alterada com sucesso!';
+                                $saida['msg'] = lang('Perfil.mensagens.senha.ok');
                                 $saida['icone'] = 'success';
                                 $saida['rows'] = $usuariosModel->affectedRows();
                             } else {
                                 // problemas ao salvar...
                                 $saida['estado'] = 'form';
-                                $saida['titulo'] = 'Erro na alteração da senha!';
+                                $saida['titulo'] = lang('Perfil.mensagens.senha.erro.geral');
                                 $saida['msg'] = lang('Artefato.crud.mensagens.salvar.erro') . '<br> ID 006';
                                 $saida['icone'] = 'error';
                                 $saida['erros'] = $usuariosModel->errors();
@@ -149,39 +149,39 @@ class Perfil extends BaseController
                         } else {
                             // senha fraca
                             $saida['estado'] = 'form';
-                            $saida['titulo'] = 'Erro na alteração da senha!';
-                            $saida['msg'] = 'Nova senha não atende aos padrões mínimos de segurança! Tente novamente seguindo as instruções!' . '<br> ID 005';
+                            $saida['titulo'] = lang('Perfil.mensagens.senha.erro.geral');
+                            $saida['msg'] = lang('Perfil.mensagens.senha.erro.seguranca') . '<br> ID 005';
                             $saida['icone'] = 'error';
                             $saida['erros'] = $usuariosModel->errors();
                         }
                     } else {
                         // nova senha diferente da confirmação
                         $saida['estado'] = 'form';
-                        $saida['titulo'] = 'Erro na alteração da senha!';
-                        $saida['msg'] = 'Senha de confirmação diferente da nova senha! Tente novamente!' . '<br> ID 004';
+                        $saida['titulo'] = lang('Perfil.mensagens.senha.erro.geral');
+                        $saida['msg'] = lang('Perfil.mensagens.senha.erro.diferente') . '<br> ID 004';
                         $saida['icone'] = 'error';
                         $saida['erros'] = $usuariosModel->errors();                            
                     }
                 } else {
                     // senha atual não bate
                     $saida['estado'] = 'form';
-                    $saida['titulo'] = 'Erro na alteração da senha!';
-                    $saida['msg'] = 'Senha atual não confere! Tente novamente!' . '<br> ID 003';
+                    $saida['titulo'] = lang('Perfil.mensagens.senha.erro.geral');
+                    $saida['msg'] = lang('Perfil.mensagens.senha.erro.divergente') . '<br> ID 003';
                     $saida['icone'] = 'error';
                     $saida['erros'] = $usuariosModel->errors();
                 }
             } else {
                 // campos incompletos
                 $saida['estado'] = 'form';
-                $saida['titulo'] = 'Erro na alteração da senha!';
-                $saida['msg'] = 'Faltam informações obrigatórias!' . '<br> ID 002';
+                $saida['titulo'] = lang('Perfil.mensagens.senha.erro.geral');
+                $saida['msg'] = lang('Perfil.mensagens.senha.erro.incompleto') . '<br> ID 002';
                 $saida['icone'] = 'error';
                 $saida['erros'] = $usuariosModel->errors();
             }
         } else {
             // não existem dados
             $saida['estado'] = 'erro';
-            $saida['titulo'] = lang('Artefato.crud.mensagens.geral.erro');
+            $saida['titulo'] = lang('Perfil.mensagens.senha.erro.geral');
             $saida['msg'] = lang('Artefato.crud.mensagens.salvar.semdados');
             $saida['icone'] = 'error';
             $saida['erros'] = array(
@@ -189,23 +189,8 @@ class Perfil extends BaseController
             );
         }
 
-        $data['dadosUsuarios'] = $usuariosModel->find($data['usuarioLogado']->ID);
-        $data['dadosRegras'] = $regrasModel->findAll();
-        $data['titulo'] = 'Perfil do Usuário';
-        $data['pagina'] = 'perfil';
-        $data['tipo_janela_impressao'] = $configuracoesModel->tipo_janela_impressao();
-        $data['estado'] = 'salvar';
-        $data['aba'] = 'senha';
-        //$data['cabecalho'] = FALSE;
-
         // enviar mensagem
         session()->setFlashData('saida', $saida);
-
-        // breadcrumb
-        $this->breadcrumb->add('Início', '/');
-        $this->breadcrumb->add('Usuarios', '/usuarios');
-        $this->breadcrumb->add('Perfil', '/perfil');
-        $data['breadcrumb'] = $this->breadcrumb->render();
 
         return view('admin/perfil.php', $data);
     }
