@@ -19,7 +19,7 @@
                 <div class="card card-widget widget-user-2">
                     <div class="widget-user-header bg-light">
                         <div class="widget-user-image ">
-                            <img class="img" src="<?= base_url('/assets/img/artefato.png'); ?>" alt="User Avatar">
+                            <img class="img" src="<?= base_url('/assets/img/' . TopWise_App_Logo()['sobre']); ?>" alt="User Avatar">
                         </div> 
 
                         <h3 class="widget-user-username"><?php echo TopWise_App_Nome(); ?></h3>

@@ -37,7 +37,7 @@ function TOPWISE_menu_logo()
 {
     ?>
         <a href="<?= base_url() ?>" class="brand-link">
-            <img src="<?= base_url('/assets/img/artefato.png') ?>" alt="Logo" class="brand-image">
+            <img src="<?= base_url('/assets/img/' . TopWise_App_Logo()['menu']) ?>" alt="Logo" class="brand-image">
             <span class="brand-text font-weight-light text-uppercase lead"><?= TopWise_App_Nome() ?></span>
         </a>
     <?php

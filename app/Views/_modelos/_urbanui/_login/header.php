@@ -7,6 +7,6 @@
 <div class="col-md-7">
     <div class="card-body">
         <div class="brand-wrapper">
-            <img src="<?= base_url('/assets/img/logo-artefato.png') ?>" alt="logo" class="logo">
+            <img src="<?= base_url('/assets/img/' . TopWise_App_Logo()['login']) ?>" alt="logo" class="logo">
         </div>
         <p class="login-card-description"><?= lang('Login.mensagens.cabecalho') ?></p>

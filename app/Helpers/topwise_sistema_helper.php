@@ -5,11 +5,11 @@
 	}
 
 	function TopWise_App_Versao() {
-		return '22.6 r4 build 18';
+		return '22.6 r4 build 19';
 	}
 
 	function TopWise_App_Data_Release() {
-		return '19/06/2022 23:22'; // iniciado em 18/02/2022
+		return '20/06/2022 08:10'; // iniciado em 18/02/2022
 	}
 
 	function TopWise_App_Data_Inicio() {
@@ -34,4 +34,15 @@
 
 	function TopWise_App_Versao_API() {
 		return '22.5 r1 - 18/02/2022 00:00';
+	}
+
+	function TopWise_App_Logo(): array
+	{
+		$data = array(
+			'menu' => 'artefato.png',
+			'login' => 'logo-artefato.png',
+			'sobre' => 'artefato.png',
+		);
+
+		return $data;
 	}
