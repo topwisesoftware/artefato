@@ -1,5 +1,7 @@
 # Topwise Software CI4 Starter APP
 
+v22.18
+
 ## What is this?
 
 A aplication bootstrap to quickly start a CI4 with AdminLTE application.

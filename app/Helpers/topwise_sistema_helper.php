@@ -5,7 +5,7 @@
 	}
 
 	function TopWise_App_Versao() {
-		return '22.6 r4 build 17';
+		return '22.6 r4 build 18';
 	}
 
 	function TopWise_App_Data_Release() {

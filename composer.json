@@ -1,6 +1,6 @@
 {
     "name": "topwisesoftware/artefato",
-    "version": "22.17",
+    "version": "22.18",
     "type": "project",
     "description": "TopWise Software CI4 Starter APP",
     "homepage": "https://topwise.com.br",
@@ -43,8 +43,7 @@
         "test": "phpunit"
     },
     "support": {
-        "forum": "http://forum.codeigniter.com/",
-        "source": "https://github.com/codeigniter4/CodeIgniter4",
-        "slack": "https://codeigniterchat.slack.com"
+        "forum": "https://topwise.com.br/produtos/artefato",
+        "source": "https://github.com/topwisesoftware/artefato"
     }
 }
