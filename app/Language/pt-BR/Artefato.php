@@ -10,19 +10,6 @@ return [
         ],
         'pesquisar' => 'Pesquisar...',
     ],
-    'login' => [
-        'titulo' => 'Acesso Restrito',
-        'cabecalho' => 'Informe usuário e senha para iniciar.',
-        'form' => [
-            'usuario' => 'Usuário',
-            'senha' => 'Senha',
-            'botao' => 'Entrar',
-        ],
-        'mensagens' => [
-            'incorreto' => 'Usuário/Senha incorretos.',
-            'negado' => 'Acesso negado.',
-        ]
-    ],
     'sobre' => [
         'titulo' => 'Sobre',
         'descricao' => 'Sistema Base para Desenvolvimento em CI4 e AdminLTE3',

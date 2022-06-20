@@ -6,6 +6,7 @@
     "homepage": "https://topwise.com.br",
     "license": "MIT",
     "minimum-stability": "dev",
+    "prefer-stable": true,
     "authors": [
         {
             "name": "Joe Edman",

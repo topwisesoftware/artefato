@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="pt_BR">
 	<head>
-		<title><?= TopWise_App_Nome() ?> | <?= lang('Artefato.login.titulo') ?></title>
+		<title><?= TopWise_App_Nome() ?> | <?= lang('Login.titulo') ?></title>
 		<!-- meta -->
 		<?= $this->include('_modelos/_urbanui/_login/meta') ?>
 		<!-- css -->

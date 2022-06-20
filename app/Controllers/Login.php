@@ -53,16 +53,16 @@ class Login extends BaseController
                     return redirect()->to(base_url());
                 } else {
                     // NOK
-                    session()->setFlashData('mensagem', lang('Artefato.login.mensagens.negado') . $senhaCorreta);
+                    session()->setFlashData('mensagem', lang('Login.mensagens.negado') . $senhaCorreta);
                     return redirect()->to('/login');
                 }
 
             } else {
-                session()->setFlashData('mensagem', lang('Artefato.login.mensagens.incorreto') . $senhaCorreta);
+                session()->setFlashData('mensagem', lang('Login.mensagens.negado') . $senhaCorreta);
                 return redirect()->to('/login');
             }
         } else {
-            session()->setFlashData('mensagem', lang('Artefato.login.mensagens.incorreto') . $senhaCorreta);
+            session()->setFlashData('mensagem', lang('Login.mensagens.negado') . $senhaCorreta);
             return redirect()->to('/login');
         }
     }

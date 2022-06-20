@@ -5,11 +5,11 @@
 	}
 
 	function TopWise_App_Versao() {
-		return '22.6 r3 build 13';
+		return '22.6 r4 build 16';
 	}
 
 	function TopWise_App_Data_Release() {
-		return '19/06/2022 02:04'; // iniciado em 18/02/2022
+		return '19/06/2022 23:22'; // iniciado em 18/02/2022
 	}
 
 	function TopWise_App_Data_Inicio() {
